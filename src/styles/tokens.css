@@ -1,0 +1,12 @@
+:root {
+  --bg: #ffffff;
+  --text: #111111;
+  --muted: #6b6b6b;
+  --line: rgba(17, 17, 17, 0.12);
+  --soft: #f6f5f3;
+
+  --radius: 14px;
+  --shadow: 0 18px 55px rgba(0, 0, 0, 0.12);
+
+  --container: 1240px;
+}
