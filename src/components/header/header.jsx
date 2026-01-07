@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useRef } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import "./header.css";
 import { NAV } from "../../data/nav";
@@ -23,11 +23,24 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openMega, setOpenMega] = useState(null);
   const location = useLocation();
+  const closeTimeoutRef = useRef(null);
 
   useEffect(() => {
     setMobileOpen(false);
     setOpenMega(null);
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
   }, [location.pathname]);
+
+  useEffect(() => {
+    return () => {
+      if (closeTimeoutRef.current) {
+        clearTimeout(closeTimeoutRef.current);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     function onKeyDown(e) {
@@ -43,7 +56,7 @@ export default function Header() {
   const nav = useMemo(() => NAV, []);
 
   return (
-    <>
+    <div className="headerWrapper">
       <div className="announcement" role="status" aria-live="polite">
         <div className="container announcementRow">
           <div className="announcementLeft">
@@ -121,10 +134,18 @@ export default function Header() {
               <div
                 key={item.label}
                 className="navItem"
-                onMouseEnter={() => setOpenMega(item.label)}
-                onMouseLeave={() =>
-                  setOpenMega((v) => (v === item.label ? null : v))
-                }
+                onMouseEnter={() => {
+                  if (closeTimeoutRef.current) {
+                    clearTimeout(closeTimeoutRef.current);
+                    closeTimeoutRef.current = null;
+                  }
+                  setOpenMega(item.label);
+                }}
+                onMouseLeave={() => {
+                  closeTimeoutRef.current = setTimeout(() => {
+                    setOpenMega(null);
+                  }, 150);
+                }}
               >
                 <NavLink
                   className={({ isActive }) =>
@@ -141,6 +162,18 @@ export default function Header() {
                   }`}
                   role="dialog"
                   aria-label={`${item.label} menu`}
+                  onMouseEnter={() => {
+                    if (closeTimeoutRef.current) {
+                      clearTimeout(closeTimeoutRef.current);
+                      closeTimeoutRef.current = null;
+                    }
+                    setOpenMega(item.label);
+                  }}
+                  onMouseLeave={() => {
+                    closeTimeoutRef.current = setTimeout(() => {
+                      setOpenMega(null);
+                    }, 150);
+                  }}
                 >
                   <div className="megaInner">
                     <div className="megaCols">
@@ -294,6 +327,6 @@ export default function Header() {
           </div>
         </div>
       </header>
-    </>
+    </div>
   );
 }

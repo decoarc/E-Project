@@ -1,6 +1,6 @@
 export const NAV = [
   {
-    label: "type 1",
+    label: "Men's",
     to: "/category/type-1",
     columns: [
       {
@@ -30,7 +30,7 @@ export const NAV = [
     },
   },
   {
-    label: "type 2",
+    label: "Women's",
     to: "/category/type-2",
     columns: [
       {
@@ -53,7 +53,7 @@ export const NAV = [
     ],
   },
   {
-    label: "type 3",
+    label: "Accessories",
     to: "/category/type-3",
     columns: [
       {

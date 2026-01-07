@@ -1,7 +1,29 @@
+.headerWrapper {
+  position: relative;
+}
+
 .announcement {
   border-bottom: 1px solid var(--line);
   background: #fff;
   font-size: 12px;
+  position: relative;
+  min-height: 3px;
+  overflow: visible;
+}
+
+.announcementRow {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.3s ease, max-height 0.3s ease, padding 0.3s ease;
+  pointer-events: none;
+}
+
+.announcement:hover .announcementRow {
+  opacity: 1;
+  max-height: 100px;
+  pointer-events: auto;
+  padding: 10px 0;
 }
 
 .announcementRow {
@@ -155,6 +177,20 @@ select {
   top: calc(100% + 12px);
   width: min(980px, calc(100vw - 40px));
   display: none;
+}
+
+.megaOpen {
+  display: block;
+}
+
+.megaOpen::before {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  right: 0;
+  height: 12px;
+  pointer-events: none;
 }
 
 .megaOpen {
