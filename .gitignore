@@ -17,7 +17,13 @@
 .env.development.local
 .env.test.local
 .env.production.local
+.env.example
 
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# API (Node)
+api/
+api/node_modules
+api/.env
