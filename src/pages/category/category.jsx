@@ -1,42 +1,18 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link, useParams } from "react-router-dom";
+import { CATEGORY_SET_ROUTES } from "../../data/categoryRoutes";
 import { fetchSet } from "../../lib/api";
 import { useCurrency } from "../../context/currencyContext";
 import "./category.css";
 
-/** Preços fictícios (USD) para o conjunto a1 na categoria Women's (type-2). */
-const TYPE2_A1_PRICES_USD = {
-  a1_bottom: 89,
-  a1_up: 79,
-};
-
-/** Rotas que carregam `/api/sets/:setId` e partilham o mesmo layout de cards. */
-const CATEGORY_SET_ROUTES = {
-  "type-1": {
-    setId: "b1",
-    kicker: "Men's · type-1",
-    title: "Men's",
-    intro: "Core silhouettes and seasonal picks built to last.",
-    priceMap: {},
-  },
-  "type-2": {
-    setId: "a1",
-    kicker: "Women's · type-2",
-    title: "Women's",
-    intro: "Harness and archive pieces curated for the season.",
-    priceMap: TYPE2_A1_PRICES_USD,
-  },
-  "type-3": {
-    setId: "c1",
-    kicker: "Accessories · type-3",
-    title: "Accessories",
-    intro: "Finishing touches that complete the look.",
-    priceMap: {},
-  },
-};
-
-function CategorySetView({ setId, kicker, title, intro, priceMap = {} }) {
+function CategorySetView({ setId, slug, priceMap = {} }) {
+  const { t } = useTranslation("category");
   const { formatPriceUsd } = useCurrency();
+  const kicker = t(`routes.${slug}.kicker`);
+  const title = t(`routes.${slug}.title`);
+  const intro = t(`routes.${slug}.intro`);
+
   const headingId = `set-${setId}-heading`;
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -54,7 +30,8 @@ function CategorySetView({ setId, kicker, title, intro, priceMap = {} }) {
       } catch (e) {
         if (!cancelled) {
           const status = typeof e?.status === "number" ? e.status : undefined;
-          const msg = e instanceof Error ? e.message : "Could not load products";
+          const msg =
+            e instanceof Error ? e.message : t("loadError");
           const missingSet =
             status === 404 || /not found/i.test(msg);
           if (missingSet) {
@@ -72,6 +49,8 @@ function CategorySetView({ setId, kicker, title, intro, priceMap = {} }) {
     return () => {
       cancelled = true;
     };
+    // Intentionally omit `t`: refetch only when `setId` changes, not when locale changes.
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- see above
   }, [setId]);
 
   return (
@@ -85,20 +64,20 @@ function CategorySetView({ setId, kicker, title, intro, priceMap = {} }) {
       <section className="categorySet" aria-labelledby={headingId}>
         <div className="categorySetHead">
           <h2 id={headingId} className="categorySetTitle">
-            {loading ? "Loading…" : (data?.name ?? "Set")}
+            {loading ? t("loading") : (data?.name ?? t("setFallback"))}
           </h2>
           {!loading && data?.products?.length > 0 && (
             <p className="categorySetSub">
-              {data.products.length} pieces · sold as a curated pair
+              {t("piecesLine", { count: data.products.length })}
             </p>
           )}
         </div>
 
         {error && (
           <p className="categoryPageError" role="alert">
-            {error}. Check that the API is running and{" "}
-            <code className="categoryPageCode">REACT_APP_API_URL</code> is
-            correct.
+            {error}. {t("apiHintBefore")}{" "}
+            <code className="categoryPageCode">REACT_APP_API_URL</code>{" "}
+            {t("apiHintAfter")}
           </p>
         )}
 
@@ -114,13 +93,15 @@ function CategorySetView({ setId, kicker, title, intro, priceMap = {} }) {
           (!data?.products || data.products.length === 0) && (
             <ul
               className="categoryGrid categoryGridComingSoon"
-              aria-label="No products in this category"
+              aria-label={t("emptyCategoryAria")}
             >
               <li>
                 <article className="categoryCard categoryCardEmpty">
                   <div className="categoryCardEmptyCanvas">
                     <div className="categoryCardEmptyFill" aria-hidden="true" />
-                    <h3 className="categoryCardComingSoonDiagonal">Coming soon</h3>
+                    <h3 className="categoryCardComingSoonDiagonal">
+                      {t("comingSoon")}
+                    </h3>
                   </div>
                 </article>
               </li>
@@ -172,7 +153,7 @@ function CategorySetView({ setId, kicker, title, intro, priceMap = {} }) {
                       </h3>
                       <p className="categoryCardPrice">{priceLabel}</p>
                       <Link className="categoryCardCta" to={href}>
-                        View details
+                        {t("viewDetails")}
                       </Link>
                     </div>
                   </article>
@@ -187,10 +168,11 @@ function CategorySetView({ setId, kicker, title, intro, priceMap = {} }) {
 }
 
 function GenericCategory({ slug }) {
+  const { t } = useTranslation("category");
   return (
     <div className="categoryPage">
       <header className="categoryPageHeader">
-        <h1 className="categoryPageTitle">Category</h1>
+        <h1 className="categoryPageTitle">{t("genericTitle")}</h1>
         <p className="categoryPageIntro">{slug}</p>
       </header>
     </div>
@@ -206,9 +188,7 @@ export default function Category() {
       <div className="container categoryPageWrap">
         <CategorySetView
           setId={setConfig.setId}
-          kicker={setConfig.kicker}
-          title={setConfig.title}
-          intro={setConfig.intro}
+          slug={slug}
           priceMap={setConfig.priceMap}
         />
       </div>

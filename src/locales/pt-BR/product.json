@@ -1,0 +1,21 @@
+{
+  "breadcrumb": "Navegação",
+  "womenType2": "Feminino · type-2",
+  "productFallback": "Produto",
+  "notFoundTitle": "Produto não encontrado",
+  "notFoundText": "Este item não está no catálogo atual.",
+  "backToWomens": "Voltar ao Feminino",
+  "viewsGroup": "Vistas do produto",
+  "showView": "Mostrar vista {{label}}",
+  "views": {
+    "front": "Frente",
+    "side": "Lateral"
+  },
+  "partOfSet": "Parte de {{name}}",
+  "pairNote": "Vendido como um par curado com a peça correspondente deste conjunto.",
+  "viewAllInSet": "← Ver tudo no conjunto",
+  "loadError": "Não foi possível carregar o produto",
+  "apiHintBefore": "Verifique se a API está em execução e se",
+  "apiHintAfter": "está correta.",
+  "heroAlt": "{{product}} — vista {{view}}"
+}

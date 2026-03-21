@@ -1,0 +1,27 @@
+{
+  "announcement": {
+    "line1": "Lançamentos exclusivos — peças limitadas",
+    "line2": "Frete grátis em pedidos acima de US$ 200",
+    "line3": "Envio mundial · Taxas e alfândega inclusas"
+  },
+  "currency": "Moeda",
+  "language": "Idioma",
+  "preferences": "Preferências",
+  "actions": "Ações",
+  "openMenu": "Abrir menu",
+  "close": "Fechar",
+  "closeMenu": "Fechar menu",
+  "mobileMenu": "Menu",
+  "search": "Buscar",
+  "account": "Conta",
+  "cart": "Sacola",
+  "brandAria": "E-Project (início)",
+  "mainNav": "Navegação principal",
+  "megaMenu": "Menu {{label}}",
+  "discover": "Descubra {{label}}",
+  "shop": "Comprar {{label}}",
+  "stories": "Stories",
+  "footer": {
+    "tagline": "Luxo street exclusivo"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "notFound": {
+    "title": "404",
+    "message": "Page introuvable."
+  },
+  "stories": {
+    "title": "Stories"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "hero": {
+    "aria": "Hero",
+    "kicker": "New season",
+    "title": "Street meets craft",
+    "sub": "Exclusive pieces. Limited runs. Built for those who move differently.",
+    "cta": "Shop the drop"
+  },
+  "collections": {
+    "title": "Shop by collection",
+    "explore": "Explore"
+  },
+  "featured": {
+    "kicker": "Exclusively at E-Project",
+    "title": "Objects with intention",
+    "desc": "Curated drops that blur the line between street and archive. Each piece is selected for its craft and character.",
+    "link": "Discover exclusives"
+  },
+  "trust": {
+    "aria": "Services",
+    "freeShipping": "Free shipping",
+    "freeShippingSub": "On orders over $200",
+    "returns": "Easy returns",
+    "returnsSub": "30 days, no questions",
+    "checkout": "Secure checkout",
+    "checkoutSub": "Protected & encrypted"
+  }
+}

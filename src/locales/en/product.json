@@ -1,0 +1,21 @@
+{
+  "breadcrumb": "Breadcrumb",
+  "womenType2": "Women's · type-2",
+  "productFallback": "Product",
+  "notFoundTitle": "Product not found",
+  "notFoundText": "This item is not in the current catalog.",
+  "backToWomens": "Back to Women's",
+  "viewsGroup": "Product views",
+  "showView": "Show {{label}} view",
+  "views": {
+    "front": "Front",
+    "side": "Side"
+  },
+  "partOfSet": "Part of {{name}}",
+  "pairNote": "Sold as a curated pair with the matching piece from this set.",
+  "viewAllInSet": "← View all in set",
+  "loadError": "Could not load product",
+  "apiHintBefore": "Check that the API is running and",
+  "apiHintAfter": "is correct.",
+  "heroAlt": "{{product}} — {{view}} view"
+}

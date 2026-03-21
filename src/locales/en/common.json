@@ -1,0 +1,27 @@
+{
+  "announcement": {
+    "line1": "Exclusive drops — limited pieces only",
+    "line2": "Free shipping on orders over $200",
+    "line3": "Worldwide shipping · Duties & customs included"
+  },
+  "currency": "Currency",
+  "language": "Language",
+  "preferences": "Preferences",
+  "actions": "Actions",
+  "openMenu": "Open menu",
+  "close": "Close",
+  "closeMenu": "Close menu",
+  "mobileMenu": "Menu",
+  "search": "Search",
+  "account": "Account",
+  "cart": "Cart",
+  "brandAria": "E-Project (home)",
+  "mainNav": "Main navigation",
+  "megaMenu": "{{label}} menu",
+  "discover": "Discover {{label}}",
+  "shop": "Shop {{label}}",
+  "stories": "Stories",
+  "footer": {
+    "tagline": "Exclusive street luxury"
+  }
+}

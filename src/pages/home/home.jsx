@@ -1,19 +1,19 @@
 import { Link } from "react-router-dom";
-import { NAV } from "../../data/nav";
+import { useTranslation } from "react-i18next";
+import { useNavItems } from "../../i18n/useNavItems";
 import "./home.css";
 
 function Hero() {
+  const { t } = useTranslation("home");
   return (
-    <section className="homeHero" aria-label="Hero">
+    <section className="homeHero" aria-label={t("hero.aria")}>
       <div className="homeHeroBg" aria-hidden="true" />
       <div className="homeHeroContent">
-        <span className="homeHeroKicker">New season</span>
-        <h1 className="homeHeroTitle">Street meets craft</h1>
-        <p className="homeHeroSub">
-          Exclusive pieces. Limited runs. Built for those who move differently.
-        </p>
+        <span className="homeHeroKicker">{t("hero.kicker")}</span>
+        <h1 className="homeHeroTitle">{t("hero.title")}</h1>
+        <p className="homeHeroSub">{t("hero.sub")}</p>
         <Link className="homeHeroCta" to="/category/new-arrivals">
-          Shop the drop
+          {t("hero.cta")}
         </Link>
       </div>
     </section>
@@ -27,6 +27,7 @@ const CARD_GRADIENTS = [
 ];
 
 function CollectionCard({ item, index }) {
+  const { t } = useTranslation("home");
   return (
     <Link
       className="homeCollectionCard"
@@ -36,13 +37,14 @@ function CollectionCard({ item, index }) {
       <div className="homeCollectionCardBg" aria-hidden="true" />
       <div className="homeCollectionCardContent">
         <span className="homeCollectionCardLabel">{item.label}</span>
-        <span className="homeCollectionCardCta">Explore</span>
+        <span className="homeCollectionCardCta">{t("collections.explore")}</span>
       </div>
     </Link>
   );
 }
 
 function FeaturedBlock() {
+  const { t } = useTranslation("home");
   return (
     <section className="homeFeatured" aria-labelledby="featured-heading">
       <div className="homeFeaturedInner">
@@ -56,16 +58,13 @@ function FeaturedBlock() {
           />
         </div>
         <div className="homeFeaturedText">
-          <span className="homeFeaturedKicker">Exclusively at E-Project</span>
+          <span className="homeFeaturedKicker">{t("featured.kicker")}</span>
           <h2 id="featured-heading" className="homeFeaturedTitle">
-            Objects with intention
+            {t("featured.title")}
           </h2>
-          <p className="homeFeaturedDesc">
-            Curated drops that blur the line between street and archive. Each
-            piece is selected for its craft and character.
-          </p>
+          <p className="homeFeaturedDesc">{t("featured.desc")}</p>
           <Link className="homeFeaturedLink" to="/category/exclusive">
-            Discover exclusives
+            {t("featured.link")}
           </Link>
         </div>
       </div>
@@ -74,13 +73,20 @@ function FeaturedBlock() {
 }
 
 function TrustBar() {
+  const { t } = useTranslation("home");
   const items = [
-    { label: "Free shipping", sub: "On orders over $200" },
-    { label: "Easy returns", sub: "30 days, no questions" },
-    { label: "Secure checkout", sub: "Protected & encrypted" },
+    {
+      label: t("trust.freeShipping"),
+      sub: t("trust.freeShippingSub"),
+    },
+    { label: t("trust.returns"), sub: t("trust.returnsSub") },
+    {
+      label: t("trust.checkout"),
+      sub: t("trust.checkoutSub"),
+    },
   ];
   return (
-    <section className="homeTrust" aria-label="Services">
+    <section className="homeTrust" aria-label={t("trust.aria")}>
       <div className="container homeTrustInner">
         {items.map((item) => (
           <div key={item.label} className="homeTrustItem">
@@ -94,17 +100,19 @@ function TrustBar() {
 }
 
 export default function Home() {
+  const { t } = useTranslation("home");
+  const nav = useNavItems();
   return (
     <div className="home">
       <Hero />
       <section className="homeCollections" aria-labelledby="collections-heading">
         <div className="container">
           <h2 id="collections-heading" className="homeSectionTitle">
-            Shop by collection
+            {t("collections.title")}
           </h2>
           <div className="homeCollectionGrid">
-            {NAV.slice(0, 3).map((item, i) => (
-              <CollectionCard key={item.label} item={item} index={i} />
+            {nav.slice(0, 3).map((item, i) => (
+              <CollectionCard key={item.to} item={item} index={i} />
             ))}
           </div>
         </div>

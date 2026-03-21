@@ -1,0 +1,28 @@
+{
+  "hero": {
+    "aria": "Hero",
+    "kicker": "Nouvelle saison",
+    "title": "La rue rencontre le savoir-faire",
+    "sub": "Pièces exclusives. Séries limitées. Pour ceux qui avancent autrement.",
+    "cta": "Découvrir le drop"
+  },
+  "collections": {
+    "title": "Shop par collection",
+    "explore": "Explorer"
+  },
+  "featured": {
+    "kicker": "Exclusif chez E-Project",
+    "title": "Des objets avec intention",
+    "desc": "Des drops sélectionnés entre rue et archive. Chaque pièce est choisie pour son artisanat et son caractère.",
+    "link": "Découvrir les exclusifs"
+  },
+  "trust": {
+    "aria": "Services",
+    "freeShipping": "Livraison gratuite",
+    "freeShippingSub": "Sur commandes de plus de 200 $",
+    "returns": "Retours faciles",
+    "returnsSub": "30 jours, sans justification",
+    "checkout": "Paiement sécurisé",
+    "checkoutSub": "Protégé et chiffré"
+  }
+}

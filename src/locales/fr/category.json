@@ -1,0 +1,29 @@
+{
+  "loading": "Chargement…",
+  "setFallback": "Set",
+  "piecesLine": "{{count}} pièces · vendues comme une paire curatée",
+  "loadError": "Impossible de charger les produits",
+  "apiHintBefore": "Vérifiez que l’API est en cours d’exécution et que",
+  "apiHintAfter": "est correcte.",
+  "emptyCategoryAria": "Aucun produit dans cette catégorie",
+  "comingSoon": "Bientôt disponible",
+  "viewDetails": "Voir les détails",
+  "genericTitle": "Catégorie",
+  "routes": {
+    "type-1": {
+      "kicker": "Homme · type-1",
+      "title": "Homme",
+      "intro": "Silhouettes essentielles et sélections saisonnières faites pour durer."
+    },
+    "type-2": {
+      "kicker": "Femme · type-2",
+      "title": "Femme",
+      "intro": "Pièces d’archive et de saison sélectionnées pour vous."
+    },
+    "type-3": {
+      "kicker": "Accessoires · type-3",
+      "title": "Accessoires",
+      "intro": "Touches finales qui complètent le look."
+    }
+  }
+}

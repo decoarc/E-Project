@@ -1,0 +1,28 @@
+{
+  "hero": {
+    "aria": "Destaque",
+    "kicker": "Nova temporada",
+    "title": "A rua encontra o ofício",
+    "sub": "Peças exclusivas. Tiragens limitadas. Para quem se move diferente.",
+    "cta": "Comprar o drop"
+  },
+  "collections": {
+    "title": "Comprar por coleção",
+    "explore": "Explorar"
+  },
+  "featured": {
+    "kicker": "Exclusivo na E-Project",
+    "title": "Objetos com intenção",
+    "desc": "Drops curados na fronteira entre rua e arquivo. Cada peça é escolhida pelo ofício e pelo caráter.",
+    "link": "Descobrir exclusivos"
+  },
+  "trust": {
+    "aria": "Serviços",
+    "freeShipping": "Frete grátis",
+    "freeShippingSub": "Em pedidos acima de US$ 200",
+    "returns": "Devolução fácil",
+    "returnsSub": "30 dias, sem perguntas",
+    "checkout": "Checkout seguro",
+    "checkoutSub": "Protegido e criptografado"
+  }
+}

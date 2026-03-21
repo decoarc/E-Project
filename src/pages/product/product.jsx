@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link, useParams } from "react-router-dom";
 import { fetchSet } from "../../lib/api";
 import { useCurrency } from "../../context/currencyContext";
@@ -13,19 +14,28 @@ const TYPE2_A1_PRICES_USD = {
 };
 
 /** Ordered list: front first (primary), then side when present. */
-function imageViewsFromUrls(imageUrls) {
+function imageViewsFromUrls(imageUrls, t) {
   if (!imageUrls) return [];
   const out = [];
   if (imageUrls.front) {
-    out.push({ key: "front", src: imageUrls.front, label: "Front" });
+    out.push({
+      key: "front",
+      src: imageUrls.front,
+      label: t("views.front"),
+    });
   }
   if (imageUrls.side) {
-    out.push({ key: "side", src: imageUrls.side, label: "Side" });
+    out.push({
+      key: "side",
+      src: imageUrls.side,
+      label: t("views.side"),
+    });
   }
   return out;
 }
 
 export default function Product() {
+  const { t } = useTranslation("product");
   const { formatPriceUsd } = useCurrency();
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
@@ -49,7 +59,9 @@ export default function Product() {
         }
       } catch (e) {
         if (!cancelled) {
-          setError(e instanceof Error ? e.message : "Could not load product");
+          setError(
+            e instanceof Error ? e.message : t("loadError")
+          );
           setSetData(null);
         }
       } finally {
@@ -59,6 +71,8 @@ export default function Product() {
     return () => {
       cancelled = true;
     };
+    // Intentionally omit `t`: fetch once on mount; `t` only used for a static fallback string.
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- see above
   }, []);
 
   const product = useMemo(() => {
@@ -67,8 +81,8 @@ export default function Product() {
   }, [setData, id]);
 
   const views = useMemo(
-    () => (product ? imageViewsFromUrls(product.imageUrls) : []),
-    [product]
+    () => (product ? imageViewsFromUrls(product.imageUrls, t) : []),
+    [product, t]
   );
 
   const activeView = views[activeIndex] ?? views[0];
@@ -77,22 +91,23 @@ export default function Product() {
 
   return (
     <div className="container productPageWrap">
-      <nav className="productBreadcrumb" aria-label="Breadcrumb">
+      <nav className="productBreadcrumb" aria-label={t("breadcrumb")}>
         <Link to={CATEGORY_HREF} className="productBreadcrumbLink">
-          Women&apos;s · type-2
+          {t("womenType2")}
         </Link>
         <span className="productBreadcrumbSep" aria-hidden="true">
           /
         </span>
         <span className="productBreadcrumbCurrent">
-          {loading ? "…" : product?.label ?? "Product"}
+          {loading ? "…" : product?.label ?? t("productFallback")}
         </span>
       </nav>
 
       {error && (
         <p className="productPageError" role="alert">
-          {error}. Check that the API is running and{" "}
-          <code className="productPageCode">REACT_APP_API_URL</code> is correct.
+          {error}. {t("apiHintBefore")}{" "}
+          <code className="productPageCode">REACT_APP_API_URL</code>{" "}
+          {t("apiHintAfter")}
         </p>
       )}
 
@@ -109,12 +124,10 @@ export default function Product() {
 
       {!loading && !error && !product && (
         <div className="productNotFound">
-          <h1 className="productNotFoundTitle">Product not found</h1>
-          <p className="productNotFoundText">
-            This item is not in the current catalog.
-          </p>
+          <h1 className="productNotFoundTitle">{t("notFoundTitle")}</h1>
+          <p className="productNotFoundText">{t("notFoundText")}</p>
           <Link className="productNotFoundCta" to={CATEGORY_HREF}>
-            Back to Women&apos;s
+            {t("backToWomens")}
           </Link>
         </div>
       )}
@@ -127,7 +140,10 @@ export default function Product() {
                 <img
                   className="productHeroImg"
                   src={activeView.src}
-                  alt={`${product.label} — ${activeView.label} view`}
+                  alt={t("heroAlt", {
+                    product: product.label,
+                    view: activeView.label,
+                  })}
                 />
               ) : (
                 <div className="productHeroPlaceholder" />
@@ -137,7 +153,7 @@ export default function Product() {
               <div
                 className="productThumbs"
                 role="group"
-                aria-label="Product views"
+                aria-label={t("viewsGroup")}
               >
                 {views.map((v, i) => (
                   <button
@@ -146,7 +162,7 @@ export default function Product() {
                     className={`productThumb${i === activeIndex ? " productThumbActive" : ""}`}
                     onClick={() => setActiveIndex(i)}
                     aria-pressed={i === activeIndex}
-                    aria-label={`Show ${v.label} view`}
+                    aria-label={t("showView", { label: v.label })}
                   >
                     <img
                       className="productThumbImg"
@@ -162,17 +178,17 @@ export default function Product() {
           </div>
 
           <div className="productAside">
-            <p className="productKicker">Women&apos;s · type-2</p>
+            <p className="productKicker">{t("womenType2")}</p>
             <h1 className="productTitle">{product.label}</h1>
             {setData?.name && (
-              <p className="productSetName">Part of {setData.name}</p>
+              <p className="productSetName">
+                {t("partOfSet", { name: setData.name })}
+              </p>
             )}
             <p className="productPrice">{priceLabel}</p>
-            <p className="productNote">
-              Sold as a curated pair with the matching piece from this set.
-            </p>
+            <p className="productNote">{t("pairNote")}</p>
             <Link className="productBackLink" to={CATEGORY_HREF}>
-              ← View all in set
+              {t("viewAllInSet")}
             </Link>
           </div>
         </div>

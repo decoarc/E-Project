@@ -1,0 +1,27 @@
+{
+  "announcement": {
+    "line1": "Drops exclusifs — pièces limitées",
+    "line2": "Livraison gratuite sur les commandes de plus de 200 $",
+    "line3": "Livraison mondiale · Droits et douanes inclus"
+  },
+  "currency": "Devise",
+  "language": "Langue",
+  "preferences": "Préférences",
+  "actions": "Actions",
+  "openMenu": "Ouvrir le menu",
+  "close": "Fermer",
+  "closeMenu": "Fermer le menu",
+  "mobileMenu": "Menu",
+  "search": "Recherche",
+  "account": "Compte",
+  "cart": "Panier",
+  "brandAria": "E-Project (accueil)",
+  "mainNav": "Navigation principale",
+  "megaMenu": "Menu {{label}}",
+  "discover": "Découvrir {{label}}",
+  "shop": "Acheter {{label}}",
+  "stories": "Stories",
+  "footer": {
+    "tagline": "Street luxe exclusif"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "loading": "Loading…",
+  "setFallback": "Set",
+  "piecesLine": "{{count}} pieces · sold as a curated pair",
+  "loadError": "Could not load products",
+  "apiHintBefore": "Check that the API is running and",
+  "apiHintAfter": "is correct.",
+  "emptyCategoryAria": "No products in this category",
+  "comingSoon": "Coming soon",
+  "viewDetails": "View details",
+  "genericTitle": "Category",
+  "routes": {
+    "type-1": {
+      "kicker": "Men's · type-1",
+      "title": "Men's",
+      "intro": "Core silhouettes and seasonal picks built to last."
+    },
+    "type-2": {
+      "kicker": "Women's · type-2",
+      "title": "Women's",
+      "intro": "Harness and archive pieces curated for the season."
+    },
+    "type-3": {
+      "kicker": "Accessories · type-3",
+      "title": "Accessories",
+      "intro": "Finishing touches that complete the look."
+    }
+  }
+}

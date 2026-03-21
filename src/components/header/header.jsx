@@ -1,8 +1,10 @@
-import { useEffect, useMemo, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import "./header.css";
-import { NAV } from "../../data/nav";
 import { useCurrency } from "../../context/currencyContext";
+import { useLanguage } from "../../i18n/useLanguage";
+import { useNavItems } from "../../i18n/useNavItems";
 
 function Icon({ name }) {
   return (
@@ -19,8 +21,10 @@ function Icon({ name }) {
 }
 
 export default function Header() {
+  const { t } = useTranslation("common");
   const { currency, setCurrency } = useCurrency();
-  const [lang, setLang] = useState("EN");
+  const { language, setLanguage, languageOptions } = useLanguage();
+  const nav = useNavItems();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openMega, setOpenMega] = useState(null);
   const location = useLocation();
@@ -54,19 +58,17 @@ export default function Header() {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, []);
 
-  const nav = useMemo(() => NAV, []);
-
   return (
     <div className="headerWrapper">
       <div className="announcement" role="status" aria-live="polite">
         <div className="container announcementRow">
           <div className="announcementLeft">
-            <strong>Exclusive drops — limited pieces only</strong>
+            <strong>{t("announcement.line1")}</strong>
             <span className="dot" aria-hidden="true" />
-            <span>Free shipping on orders over $200</span>
+            <span>{t("announcement.line2")}</span>
           </div>
           <div className="announcementRight">
-            Worldwide shipping · Duties & customs included
+            {t("announcement.line3")}
           </div>
         </div>
       </div>
@@ -76,7 +78,7 @@ export default function Header() {
           <button
             className="iconBtn headerHamburger"
             onClick={() => setMobileOpen(true)}
-            aria-label="Abrir menu"
+            aria-label={t("openMenu")}
             aria-expanded={mobileOpen}
             aria-controls="mobileNav"
             type="button"
@@ -84,13 +86,13 @@ export default function Header() {
             <Icon name="menu" />
           </button>
 
-          <div className="headerControls" aria-label="Preferências">
+          <div className="headerControls" aria-label={t("preferences")}>
             <label className="pillSelect">
-              <span className="pillLabel">Currency</span>
+              <span className="pillLabel">{t("currency")}</span>
               <select
                 value={currency}
                 onChange={(e) => setCurrency(e.target.value)}
-                aria-label="Currency"
+                aria-label={t("currency")}
               >
                 <option value="USD">USD $</option>
                 <option value="CAD">CAD $</option>
@@ -99,38 +101,40 @@ export default function Header() {
             </label>
 
             <label className="pillSelect">
-              <span className="pillLabel">Language</span>
+              <span className="pillLabel">{t("language")}</span>
               <select
-                value={lang}
-                onChange={(e) => setLang(e.target.value)}
-                aria-label="Language"
+                value={language}
+                onChange={(e) => setLanguage(e.target.value)}
+                aria-label={t("language")}
               >
-                <option value="EN">EN</option>
-                <option value="FR">FR</option>
-                <option value="PT-BR">PT-BR</option>
+                {languageOptions.map((opt) => (
+                  <option key={opt.value} value={opt.value}>
+                    {opt.label}
+                  </option>
+                ))}
               </select>
             </label>
           </div>
 
-          <Link className="brand" to="/" aria-label="E-Project (mick)">
+          <Link className="brand" to="/" aria-label={t("brandAria")}>
             E-Project
           </Link>
 
-          <div className="headerActions" aria-label="Ações">
-            <button className="iconBtn" type="button" aria-label="Search">
+          <div className="headerActions" aria-label={t("actions")}>
+            <button className="iconBtn" type="button" aria-label={t("search")}>
               <Icon name="search" />
             </button>
-            <button className="iconBtn" type="button" aria-label="Account">
+            <button className="iconBtn" type="button" aria-label={t("account")}>
               <Icon name="user" />
             </button>
-            <button className="iconBtn" type="button" aria-label="Cart">
+            <button className="iconBtn" type="button" aria-label={t("cart")}>
               <Icon name="bag" />
             </button>
           </div>
         </div>
 
         <div className="container navRow">
-          <nav className="nav" aria-label="Navegação principal">
+          <nav className="nav" aria-label={t("mainNav")}>
             {nav.map((item) => (
               <div
                 key={item.label}
@@ -162,7 +166,7 @@ export default function Header() {
                     openMega === item.label ? "megaOpen" : ""
                   }`}
                   role="dialog"
-                  aria-label={`${item.label} menu`}
+                  aria-label={t("megaMenu", { label: item.label })}
                   onMouseEnter={() => {
                     if (closeTimeoutRef.current) {
                       clearTimeout(closeTimeoutRef.current);
@@ -207,10 +211,10 @@ export default function Header() {
                     ) : (
                       <div className="megaPromo megaPromoMuted">
                         <div className="megaPromoTitle">
-                          Discover {item.label}
+                          {t("discover", { label: item.label })}
                         </div>
                         <Link className="btn" to={item.to}>
-                          Shop {item.label}
+                          {t("shop", { label: item.label })}
                         </Link>
                       </div>
                     )}
@@ -225,7 +229,7 @@ export default function Header() {
               }
               to="/stories"
             >
-              Stories
+              {t("stories")}
             </NavLink>
           </nav>
         </div>
@@ -238,10 +242,10 @@ export default function Header() {
           <button
             className="mobileBackdrop"
             type="button"
-            aria-label="Fechar"
+            aria-label={t("close")}
             onClick={() => setMobileOpen(false)}
           />
-          <div className="mobilePanel" role="dialog" aria-label="Menu">
+          <div className="mobilePanel" role="dialog" aria-label={t("mobileMenu")}>
             <div className="mobileHead">
               <Link
                 className="brand brandMobile"
@@ -254,7 +258,7 @@ export default function Header() {
                 className="iconBtn"
                 type="button"
                 onClick={() => setMobileOpen(false)}
-                aria-label="Fechar menu"
+                aria-label={t("closeMenu")}
               >
                 ✕
               </button>
@@ -263,11 +267,11 @@ export default function Header() {
             <div className="mobileBody">
               <div className="mobilePrefs">
                 <div className="mobilePrefRow">
-                  <span className="mobilePrefLabel">Currency</span>
+                  <span className="mobilePrefLabel">{t("currency")}</span>
                   <select
                     value={currency}
                     onChange={(e) => setCurrency(e.target.value)}
-                    aria-label="Currency"
+                    aria-label={t("currency")}
                   >
                     <option value="USD">USD $</option>
                     <option value="CAD">CAD $</option>
@@ -275,15 +279,17 @@ export default function Header() {
                   </select>
                 </div>
                 <div className="mobilePrefRow">
-                  <span className="mobilePrefLabel">Language</span>
+                  <span className="mobilePrefLabel">{t("language")}</span>
                   <select
-                    value={lang}
-                    onChange={(e) => setLang(e.target.value)}
-                    aria-label="Language"
+                    value={language}
+                    onChange={(e) => setLanguage(e.target.value)}
+                    aria-label={t("language")}
                   >
-                    <option value="EN">EN</option>
-                    <option value="FR">FR</option>
-                    <option value="PT-BR">PT-BR</option>
+                    {languageOptions.map((opt) => (
+                      <option key={opt.value} value={opt.value}>
+                        {opt.label}
+                      </option>
+                    ))}
                   </select>
                 </div>
               </div>
@@ -298,7 +304,7 @@ export default function Header() {
                       to={item.to}
                       onClick={() => setMobileOpen(false)}
                     >
-                      Shop {item.label}
+                      {t("shop", { label: item.label })}
                     </Link>
 
                     {item.columns
@@ -322,7 +328,7 @@ export default function Header() {
                 to="/stories"
                 onClick={() => setMobileOpen(false)}
               >
-                Stories
+                {t("stories")}
               </Link>
             </div>
           </div>

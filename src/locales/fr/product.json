@@ -1,0 +1,21 @@
+{
+  "breadcrumb": "Fil d’Ariane",
+  "womenType2": "Femme · type-2",
+  "productFallback": "Produit",
+  "notFoundTitle": "Produit introuvable",
+  "notFoundText": "Cet article n’est pas dans le catalogue actuel.",
+  "backToWomens": "Retour Femme",
+  "viewsGroup": "Vues du produit",
+  "showView": "Afficher la vue {{label}}",
+  "views": {
+    "front": "Face",
+    "side": "Profil"
+  },
+  "partOfSet": "Fait partie de {{name}}",
+  "pairNote": "Vendu comme une paire curatée avec la pièce assortie de ce set.",
+  "viewAllInSet": "← Voir tout dans le set",
+  "loadError": "Impossible de charger le produit",
+  "apiHintBefore": "Vérifiez que l’API est en cours d’exécution et que",
+  "apiHintAfter": "est correcte.",
+  "heroAlt": "{{product}} — vue {{view}}"
+}
