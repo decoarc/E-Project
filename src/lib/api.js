@@ -8,7 +8,10 @@ export async function fetchSet(setId) {
   const res = await fetch(`${getApiBase()}/api/sets/${encodeURIComponent(setId)}`);
   if (!res.ok) {
     const err = await res.json().catch(() => ({}));
-    throw new Error(err.error || `Request failed (${res.status})`);
+    const message = err.error || `Request failed (${res.status})`;
+    const error = new Error(message);
+    error.status = res.status;
+    throw error;
   }
   return res.json();
 }

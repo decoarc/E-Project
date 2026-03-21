@@ -92,6 +92,62 @@
   }
 }
 
+.categoryGridComingSoon {
+  grid-template-columns: 1fr;
+  max-width: 440px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.categoryCardEmpty {
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.categoryCardEmptyCanvas {
+  position: relative;
+  width: 100%;
+  min-height: min(72vw, 520px);
+  aspect-ratio: 3 / 4;
+  max-height: 560px;
+}
+
+.categoryCardEmptyFill {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    var(--soft) 0%,
+    #ebe9e4 45%,
+    var(--soft) 100%
+  );
+}
+
+.categoryCardComingSoonDiagonal {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  margin: 0;
+  width: max-content;
+  max-width: none;
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 5.5vw, 2rem);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text);
+  opacity: 0.42;
+  white-space: nowrap;
+  line-height: 1;
+  text-align: center;
+  transform: translate(-50%, -50%) rotate(-32deg);
+  transform-origin: center center;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
 .categoryGridSkeleton {
   min-height: 200px;
 }
