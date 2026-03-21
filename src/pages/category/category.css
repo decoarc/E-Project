@@ -129,9 +129,20 @@
 
 .categoryCardMedia {
   display: block;
+  position: relative;
   aspect-ratio: 3 / 4;
   background: var(--soft);
   overflow: hidden;
+}
+
+.categoryCardMediaInner {
+  position: absolute;
+  inset: 0;
+  transition: transform 0.45s ease;
+}
+
+.categoryCard:hover .categoryCardMediaInner {
+  transform: scale(1.03);
 }
 
 .categoryCardImg {
@@ -139,11 +150,75 @@
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+.categoryCardImgSingle {
   transition: transform 0.45s ease;
 }
 
-.categoryCard:hover .categoryCardImg {
+.categoryCard:hover .categoryCardImgSingle {
   transform: scale(1.03);
+}
+
+.categoryCardImgFront,
+.categoryCardImgSide {
+  position: absolute;
+  inset: 0;
+}
+
+.categoryCardImgSide {
+  opacity: 0;
+}
+
+.categoryCard:hover .categoryCardImgFront {
+  animation: categoryCardFadeFront 3.5s ease-in-out infinite;
+}
+
+.categoryCard:hover .categoryCardImgSide {
+  animation: categoryCardFadeSide 3.5s ease-in-out infinite;
+}
+
+@keyframes categoryCardFadeFront {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes categoryCardFadeSide {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .categoryCard:hover .categoryCardMediaInner {
+    transform: none;
+  }
+
+  .categoryCard:hover .categoryCardImgSingle {
+    transform: none;
+  }
+
+  .categoryCard:hover .categoryCardImgFront,
+  .categoryCard:hover .categoryCardImgSide {
+    animation: none;
+  }
+
+  .categoryCardImgFront {
+    opacity: 1;
+  }
+
+  .categoryCardImgSide {
+    opacity: 0;
+  }
 }
 
 .categoryCardPlaceholder {

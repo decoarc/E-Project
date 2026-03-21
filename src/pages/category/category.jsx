@@ -94,12 +94,29 @@ function Type2WomensSet() {
                   <article className="categoryCard">
                     <Link className="categoryCardMedia" to={href}>
                       {product.imageUrls?.front ? (
-                        <img
-                          src={product.imageUrls.front}
-                          alt=""
-                          className="categoryCardImg"
-                          loading="lazy"
-                        />
+                        product.imageUrls?.side ? (
+                          <div className="categoryCardMediaInner">
+                            <img
+                              src={product.imageUrls.front}
+                              alt=""
+                              className="categoryCardImg categoryCardImgFront"
+                              loading="lazy"
+                            />
+                            <img
+                              src={product.imageUrls.side}
+                              alt=""
+                              className="categoryCardImg categoryCardImgSide"
+                              loading="lazy"
+                            />
+                          </div>
+                        ) : (
+                          <img
+                            src={product.imageUrls.front}
+                            alt=""
+                            className="categoryCardImg categoryCardImgSingle"
+                            loading="lazy"
+                          />
+                        )
                       ) : (
                         <div className="categoryCardPlaceholder" />
                       )}
