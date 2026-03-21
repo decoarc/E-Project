@@ -1,0 +1,11 @@
+.siteFooter {
+  border-top: 1px solid var(--line);
+  padding: 32px 0;
+}
+
+.siteFooterCopy {
+  display: block;
+  font-size: 12px;
+  letter-spacing: 0.03em;
+  color: var(--muted);
+}

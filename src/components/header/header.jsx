@@ -60,12 +60,12 @@ export default function Header() {
       <div className="announcement" role="status" aria-live="polite">
         <div className="container announcementRow">
           <div className="announcementLeft">
-            <strong>You are $175.00 away from free shipping</strong>
+            <strong>Exclusive drops — limited pieces only</strong>
             <span className="dot" aria-hidden="true" />
-            <span>US & Canada: Duties and customs are on us</span>
+            <span>Free shipping on orders over $200</span>
           </div>
           <div className="announcementRight">
-            Order by Dec 10 (US) / Dec 4 (Canada) for on-time Holiday delivery
+            Worldwide shipping · Duties & customs included
           </div>
         </div>
       </div>

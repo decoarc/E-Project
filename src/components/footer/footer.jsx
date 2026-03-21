@@ -2,10 +2,10 @@ import "./footer.css";
 
 export default function Footer() {
   return (
-    <footer style={{ borderTop: "1px solid var(--line)", padding: "24px 0" }}>
+    <footer className="siteFooter">
       <div className="container">
-        <small style={{ color: "var(--muted)" }}>
-          © {new Date().getFullYear()} E-Project (mick)
+        <small className="siteFooterCopy">
+          © {new Date().getFullYear()} E-Project — Exclusive street luxury
         </small>
       </div>
     </footer>
