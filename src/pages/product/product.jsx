@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { fetchSet } from "../../lib/api";
+import { useCurrency } from "../../context/currencyContext";
 import "./product.css";
 
 const SET_ID = "a1";
@@ -10,15 +11,6 @@ const TYPE2_A1_PRICES_USD = {
   a1_bottom: 89,
   a1_up: 79,
 };
-
-function formatUsd(amount) {
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
-  }).format(amount);
-}
 
 /** Ordered list: front first (primary), then side when present. */
 function imageViewsFromUrls(imageUrls) {
@@ -34,6 +26,7 @@ function imageViewsFromUrls(imageUrls) {
 }
 
 export default function Product() {
+  const { formatPriceUsd } = useCurrency();
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -80,7 +73,7 @@ export default function Product() {
 
   const activeView = views[activeIndex] ?? views[0];
   const priceUsd = product ? TYPE2_A1_PRICES_USD[product.id] : undefined;
-  const priceLabel = priceUsd != null ? formatUsd(priceUsd) : "—";
+  const priceLabel = priceUsd != null ? formatPriceUsd(priceUsd) : "—";
 
   return (
     <div className="container productPageWrap">

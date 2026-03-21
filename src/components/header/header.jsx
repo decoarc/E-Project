@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState, useRef } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import "./header.css";
 import { NAV } from "../../data/nav";
+import { useCurrency } from "../../context/currencyContext";
 
 function Icon({ name }) {
   return (
@@ -18,7 +19,7 @@ function Icon({ name }) {
 }
 
 export default function Header() {
-  const [currency, setCurrency] = useState("USD");
+  const { currency, setCurrency } = useCurrency();
   const [lang, setLang] = useState("EN");
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openMega, setOpenMega] = useState(null);

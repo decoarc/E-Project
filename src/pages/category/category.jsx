@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { fetchSet } from "../../lib/api";
+import { useCurrency } from "../../context/currencyContext";
 import "./category.css";
 
 /** Preços fictícios (USD) para o conjunto a1 na categoria Women's (type-2). */
@@ -34,16 +35,8 @@ const CATEGORY_SET_ROUTES = {
   },
 };
 
-function formatUsd(amount) {
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
-  }).format(amount);
-}
-
 function CategorySetView({ setId, kicker, title, intro, priceMap = {} }) {
+  const { formatPriceUsd } = useCurrency();
   const headingId = `set-${setId}-heading`;
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -139,7 +132,7 @@ function CategorySetView({ setId, kicker, title, intro, priceMap = {} }) {
             {data.products.map((product) => {
               const priceUsd = priceMap[product.id];
               const priceLabel =
-                priceUsd != null ? formatUsd(priceUsd) : "—";
+                priceUsd != null ? formatPriceUsd(priceUsd) : "—";
               const href = `/product/${encodeURIComponent(product.id)}`;
               return (
                 <li key={product.id}>
