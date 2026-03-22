@@ -10,6 +10,11 @@
   "viewDetails": "Ver detalhes",
   "genericTitle": "Categoria",
   "routes": {
+    "new-arrivals": {
+      "kicker": "Recém-chegado",
+      "title": "Novidades",
+      "intro": "O conjunto mais recente, direto do estúdio."
+    },
     "type-1": {
       "kicker": "Masculino · type-1",
       "title": "Masculino",

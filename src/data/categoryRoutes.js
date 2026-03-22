@@ -5,10 +5,16 @@ export const TYPE2_A1_PRICES_USD = {
 };
 
 /**
- * Rotas que carregam `/api/sets/:setId` e partilham o mesmo layout de cards.
+ * Rotas que carregam dados de sets e partilham o mesmo layout de cards.
+ * — `setId` + `fetchSet` /api/sets/:id
+ * — `useLatest` + `fetchLatestSet` (ver `src/lib/api.js`)
  * Textos visíveis vivem em `locales/<lng>/category.json` em `routes.<slug>`.
  */
 export const CATEGORY_SET_ROUTES = {
+  "new-arrivals": {
+    useLatest: true,
+    priceMap: {},
+  },
   "type-1": {
     setId: "b1",
     priceMap: {},

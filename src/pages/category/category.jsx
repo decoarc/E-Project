@@ -2,18 +2,18 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useParams } from "react-router-dom";
 import { CATEGORY_SET_ROUTES } from "../../data/categoryRoutes";
-import { fetchSet } from "../../lib/api";
+import { fetchLatestSet, fetchSet } from "../../lib/api";
 import { useCurrency } from "../../context/currencyContext";
 import "./category.css";
 
-function CategorySetView({ setId, slug, priceMap = {} }) {
+function CategorySetView({ setId, slug, priceMap = {}, useLatest = false }) {
   const { t } = useTranslation("category");
   const { formatPriceUsd } = useCurrency();
   const kicker = t(`routes.${slug}.kicker`);
   const title = t(`routes.${slug}.title`);
   const intro = t(`routes.${slug}.intro`);
 
-  const headingId = `set-${setId}-heading`;
+  const headingId = useLatest ? `set-${slug}-heading` : `set-${setId}-heading`;
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
@@ -22,7 +22,7 @@ function CategorySetView({ setId, slug, priceMap = {} }) {
     let cancelled = false;
     (async () => {
       try {
-        const json = await fetchSet(setId);
+        const json = useLatest ? await fetchLatestSet() : await fetchSet(setId);
         if (!cancelled) {
           setData(json);
           setError(null);
@@ -51,7 +51,7 @@ function CategorySetView({ setId, slug, priceMap = {} }) {
     };
     // Intentionally omit `t`: refetch only when `setId` changes, not when locale changes.
     // eslint-disable-next-line react-hooks/exhaustive-deps -- see above
-  }, [setId]);
+  }, [setId, useLatest]);
 
   return (
     <div className="categoryPage">
@@ -190,6 +190,7 @@ export default function Category() {
           setId={setConfig.setId}
           slug={slug}
           priceMap={setConfig.priceMap}
+          useLatest={setConfig.useLatest === true}
         />
       </div>
     );

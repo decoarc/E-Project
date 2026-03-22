@@ -10,6 +10,11 @@
   "viewDetails": "Voir les détails",
   "genericTitle": "Catégorie",
   "routes": {
+    "new-arrivals": {
+      "kicker": "Tout juste arrivé",
+      "title": "Nouveautés",
+      "intro": "Le dernier set sélectionné, tout droit du studio."
+    },
     "type-1": {
       "kicker": "Homme · type-1",
       "title": "Homme",

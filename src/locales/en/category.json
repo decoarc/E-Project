@@ -10,6 +10,11 @@
   "viewDetails": "View details",
   "genericTitle": "Category",
   "routes": {
+    "new-arrivals": {
+      "kicker": "Just in",
+      "title": "New arrivals",
+      "intro": "The latest curated set, straight from the studio."
+    },
     "type-1": {
       "kicker": "Men's · type-1",
       "title": "Men's",
