@@ -10,7 +10,7 @@ import {
 const STORAGE_KEY = "e-project.currency";
 
 const FRANKFURTER_URL =
-  "https://api.frankfurter.app/latest?from=USD&to=CAD,BRL";
+  "https://api.frankfurter.dev/v1/latest?base=USD&symbols=CAD,BRL";
 
 const CurrencyContext = createContext(null);
 
@@ -102,7 +102,7 @@ export function CurrencyProvider({ children }) {
       }
       return formatAmount(amountUsd * rate, currency);
     },
-    [currency, rates, ratesStatus]
+    [currency, rates, ratesStatus],
   );
 
   const value = useMemo(
@@ -113,11 +113,13 @@ export function CurrencyProvider({ children }) {
       ratesStatus,
       formatPriceUsd,
     }),
-    [currency, setCurrency, rates, ratesStatus, formatPriceUsd]
+    [currency, setCurrency, rates, ratesStatus, formatPriceUsd],
   );
 
   return (
-    <CurrencyContext.Provider value={value}>{children}</CurrencyContext.Provider>
+    <CurrencyContext.Provider value={value}>
+      {children}
+    </CurrencyContext.Provider>
   );
 }
 
