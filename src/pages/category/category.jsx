@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useParams } from "react-router-dom";
+import { useCart } from "../../context/cartContext";
 import { CATEGORY_SET_ROUTES } from "../../data/categoryRoutes";
 import { fetchLatestSet, fetchSet } from "../../lib/api";
 import { useCurrency } from "../../context/currencyContext";
@@ -9,6 +10,7 @@ import "./category.css";
 function CategorySetView({ setId, slug, priceMap = {}, useLatest = false }) {
   const { t } = useTranslation("category");
   const { formatPriceUsd } = useCurrency();
+  const { addItem } = useCart();
   const kicker = t(`routes.${slug}.kicker`);
   const title = t(`routes.${slug}.title`);
   const intro = t(`routes.${slug}.intro`);
@@ -152,9 +154,27 @@ function CategorySetView({ setId, slug, priceMap = {}, useLatest = false }) {
                         <Link to={href}>{product.label}</Link>
                       </h3>
                       <p className="categoryCardPrice">{priceLabel}</p>
-                      <Link className="categoryCardCta" to={href}>
-                        {t("viewDetails")}
-                      </Link>
+                      <div className="categoryCardActions">
+                        <Link className="categoryCardCta" to={href}>
+                          {t("viewDetails")}
+                        </Link>
+                        {priceUsd != null && (
+                          <button
+                            type="button"
+                            className="categoryCardAddBtn"
+                            onClick={() =>
+                              addItem({
+                                productId: product.id,
+                                label: product.label,
+                                priceUsd,
+                                imageUrl: product.imageUrls?.front,
+                              })
+                            }
+                          >
+                            {t("addToCart")}
+                          </button>
+                        )}
+                      </div>
                     </div>
                   </article>
                 </li>

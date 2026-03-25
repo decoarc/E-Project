@@ -1,0 +1,14 @@
+{
+  "title": "Cart",
+  "lineCount_one": "{{count}} item",
+  "lineCount_other": "{{count}} items",
+  "empty": "Your bag is empty.",
+  "continueShopping": "Continue shopping",
+  "listAria": "Shopping items",
+  "each": "each",
+  "quantity": "Qty",
+  "quantityFor": "Quantity for {{name}}",
+  "remove": "Remove",
+  "subtotal": "Subtotal",
+  "checkoutNote": "Checkout is not connected yet — this is a demo cart."
+}

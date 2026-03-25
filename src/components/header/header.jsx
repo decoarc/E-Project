@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import "./header.css";
+import { useCart } from "../../context/cartContext";
 import { useCurrency } from "../../context/currencyContext";
 import { useLanguage } from "../../i18n/useLanguage";
 import { useNavItems } from "../../i18n/useNavItems";
@@ -23,6 +24,7 @@ function Icon({ name }) {
 export default function Header() {
   const { t } = useTranslation("common");
   const { currency, setCurrency } = useCurrency();
+  const { totalQuantity } = useCart();
   const { language, setLanguage, languageOptions } = useLanguage();
   const nav = useNavItems();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -127,9 +129,20 @@ export default function Header() {
             <button className="iconBtn" type="button" aria-label={t("account")}>
               <Icon name="user" />
             </button>
-            <button className="iconBtn" type="button" aria-label={t("cart")}>
+            <Link
+              className="iconBtn headerCartBtn"
+              to="/cart"
+              aria-label={
+                totalQuantity > 0
+                  ? t("cartWithCount", { count: totalQuantity })
+                  : t("cart")
+              }
+            >
               <Icon name="bag" />
-            </button>
+              {totalQuantity > 0 ? (
+                <span className="headerCartBadge">{totalQuantity > 99 ? "99+" : totalQuantity}</span>
+              ) : null}
+            </Link>
           </div>
         </div>
 
@@ -265,6 +278,16 @@ export default function Header() {
             </div>
 
             <div className="mobileBody">
+              <Link
+                className="mobileCartLink"
+                to="/cart"
+                onClick={() => setMobileOpen(false)}
+              >
+                {t("cart")}
+                {totalQuantity > 0 ? (
+                  <span className="mobileCartBadge">{totalQuantity > 99 ? "99+" : totalQuantity}</span>
+                ) : null}
+              </Link>
               <div className="mobilePrefs">
                 <div className="mobilePrefRow">
                   <span className="mobilePrefLabel">{t("currency")}</span>

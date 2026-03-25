@@ -1,0 +1,14 @@
+{
+  "title": "Panier",
+  "lineCount_one": "{{count}} article",
+  "lineCount_other": "{{count}} articles",
+  "empty": "Votre panier est vide.",
+  "continueShopping": "Continuer les achats",
+  "listAria": "Articles du panier",
+  "each": "l'unité",
+  "quantity": "Qté",
+  "quantityFor": "Quantité — {{name}}",
+  "remove": "Retirer",
+  "subtotal": "Sous-total",
+  "checkoutNote": "Le paiement n'est pas encore connecté — panier de démonstration."
+}

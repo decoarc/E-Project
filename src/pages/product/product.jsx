@@ -1,17 +1,16 @@
 import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useParams } from "react-router-dom";
-import { fetchSet } from "../../lib/api";
+import { useCart } from "../../context/cartContext";
 import { useCurrency } from "../../context/currencyContext";
+import {
+  getCategoryHrefForSetId,
+  getCategorySlugForSetId,
+  getSetIdForProductId,
+  PRODUCT_PRICES_USD,
+} from "../../data/categoryRoutes";
+import { fetchSet } from "../../lib/api";
 import "./product.css";
-
-const SET_ID = "a1";
-const CATEGORY_HREF = "/category/type-2";
-
-const TYPE2_A1_PRICES_USD = {
-  a1_bottom: 89,
-  a1_up: 79,
-};
 
 /** Ordered list: front first (primary), then side when present. */
 function imageViewsFromUrls(imageUrls, t) {
@@ -35,13 +34,30 @@ function imageViewsFromUrls(imageUrls, t) {
 }
 
 export default function Product() {
-  const { t } = useTranslation("product");
+  const { t } = useTranslation(["product", "category"]);
   const { formatPriceUsd } = useCurrency();
+  const { addItem } = useCart();
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [setData, setSetData] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
+
+  const setId = useMemo(() => getSetIdForProductId(id), [id]);
+  const categorySlug = useMemo(
+    () => getCategorySlugForSetId(setId),
+    [setId]
+  );
+  const categoryHref = useMemo(
+    () => getCategoryHrefForSetId(setId),
+    [setId]
+  );
+  const categoryKicker = t(`routes.${categorySlug}.kicker`, {
+    ns: "category",
+  });
+  const categoryTitle = t(`routes.${categorySlug}.title`, {
+    ns: "category",
+  });
 
   useEffect(() => {
     setActiveIndex(0);
@@ -52,7 +68,7 @@ export default function Product() {
     (async () => {
       setLoading(true);
       try {
-        const json = await fetchSet(SET_ID);
+        const json = await fetchSet(setId);
         if (!cancelled) {
           setSetData(json);
           setError(null);
@@ -71,9 +87,8 @@ export default function Product() {
     return () => {
       cancelled = true;
     };
-    // Intentionally omit `t`: fetch once on mount; `t` only used for a static fallback string.
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- see above
-  }, []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- refetch only when set changes; `t` only for error copy
+  }, [setId]);
 
   const product = useMemo(() => {
     if (!setData?.products?.length || !id) return null;
@@ -86,14 +101,14 @@ export default function Product() {
   );
 
   const activeView = views[activeIndex] ?? views[0];
-  const priceUsd = product ? TYPE2_A1_PRICES_USD[product.id] : undefined;
+  const priceUsd = product ? PRODUCT_PRICES_USD[product.id] : undefined;
   const priceLabel = priceUsd != null ? formatPriceUsd(priceUsd) : "—";
 
   return (
     <div className="container productPageWrap">
       <nav className="productBreadcrumb" aria-label={t("breadcrumb")}>
-        <Link to={CATEGORY_HREF} className="productBreadcrumbLink">
-          {t("womenType2")}
+        <Link to={categoryHref} className="productBreadcrumbLink">
+          {categoryKicker}
         </Link>
         <span className="productBreadcrumbSep" aria-hidden="true">
           /
@@ -126,8 +141,8 @@ export default function Product() {
         <div className="productNotFound">
           <h1 className="productNotFoundTitle">{t("notFoundTitle")}</h1>
           <p className="productNotFoundText">{t("notFoundText")}</p>
-          <Link className="productNotFoundCta" to={CATEGORY_HREF}>
-            {t("backToWomens")}
+          <Link className="productNotFoundCta" to={categoryHref}>
+            {t("backToCategory", { category: categoryTitle })}
           </Link>
         </div>
       )}
@@ -178,7 +193,7 @@ export default function Product() {
           </div>
 
           <div className="productAside">
-            <p className="productKicker">{t("womenType2")}</p>
+            <p className="productKicker">{categoryKicker}</p>
             <h1 className="productTitle">{product.label}</h1>
             {setData?.name && (
               <p className="productSetName">
@@ -186,8 +201,24 @@ export default function Product() {
               </p>
             )}
             <p className="productPrice">{priceLabel}</p>
+            {priceUsd != null && (
+              <button
+                type="button"
+                className="productAddBtn"
+                onClick={() =>
+                  addItem({
+                    productId: product.id,
+                    label: product.label,
+                    priceUsd,
+                    imageUrl: product.imageUrls?.front,
+                  })
+                }
+              >
+                {t("addToCart")}
+              </button>
+            )}
             <p className="productNote">{t("pairNote")}</p>
-            <Link className="productBackLink" to={CATEGORY_HREF}>
+            <Link className="productBackLink" to={categoryHref}>
               {t("viewAllInSet")}
             </Link>
           </div>

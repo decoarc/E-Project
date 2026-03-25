@@ -5,6 +5,7 @@
   "notFoundTitle": "Product not found",
   "notFoundText": "This item is not in the current catalog.",
   "backToWomens": "Back to Women's",
+  "backToCategory": "Back to {{category}}",
   "viewsGroup": "Product views",
   "showView": "Show {{label}} view",
   "views": {
@@ -17,5 +18,6 @@
   "loadError": "Could not load product",
   "apiHintBefore": "Check that the API is running and",
   "apiHintAfter": "is correct.",
-  "heroAlt": "{{product}} — {{view}} view"
+  "heroAlt": "{{product}} — {{view}} view",
+  "addToCart": "Add to bag"
 }

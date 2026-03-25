@@ -8,6 +8,7 @@ import enCategory from "../locales/en/category.json";
 import enProduct from "../locales/en/product.json";
 import enHome from "../locales/en/home.json";
 import enPages from "../locales/en/pages.json";
+import enCart from "../locales/en/cart.json";
 
 import frCommon from "../locales/fr/common.json";
 import frNav from "../locales/fr/nav.json";
@@ -15,6 +16,7 @@ import frCategory from "../locales/fr/category.json";
 import frProduct from "../locales/fr/product.json";
 import frHome from "../locales/fr/home.json";
 import frPages from "../locales/fr/pages.json";
+import frCart from "../locales/fr/cart.json";
 
 import ptBRCommon from "../locales/pt-BR/common.json";
 import ptBRNav from "../locales/pt-BR/nav.json";
@@ -22,6 +24,7 @@ import ptBRCategory from "../locales/pt-BR/category.json";
 import ptBRProduct from "../locales/pt-BR/product.json";
 import ptBRHome from "../locales/pt-BR/home.json";
 import ptBRPages from "../locales/pt-BR/pages.json";
+import ptBRCart from "../locales/pt-BR/cart.json";
 
 /** Idiomas expostos na UI (select). */
 export const SUPPORTED_LANGUAGES = ["en", "fr", "pt-BR"];
@@ -42,6 +45,7 @@ const ptBrBundle = {
   product: ptBRProduct,
   home: ptBRHome,
   pages: ptBRPages,
+  cart: ptBRCart,
 };
 
 const resources = {
@@ -52,6 +56,7 @@ const resources = {
     product: enProduct,
     home: enHome,
     pages: enPages,
+    cart: enCart,
   },
   fr: {
     common: frCommon,
@@ -60,6 +65,7 @@ const resources = {
     product: frProduct,
     home: frHome,
     pages: frPages,
+    cart: frCart,
   },
   "pt-BR": ptBrBundle,
   pt: ptBrBundle,
@@ -73,7 +79,7 @@ i18n
     fallbackLng: "en",
     supportedLngs: I18N_SUPPORTED_LANGUAGES,
     nonExplicitSupportedLngs: true,
-    ns: ["common", "nav", "category", "product", "home", "pages"],
+    ns: ["common", "nav", "category", "product", "home", "pages", "cart"],
     defaultNS: "common",
     detection: {
       order: ["localStorage", "navigator"],

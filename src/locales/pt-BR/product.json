@@ -5,6 +5,7 @@
   "notFoundTitle": "Produto não encontrado",
   "notFoundText": "Este item não está no catálogo atual.",
   "backToWomens": "Voltar ao Feminino",
+  "backToCategory": "Voltar a {{category}}",
   "viewsGroup": "Vistas do produto",
   "showView": "Mostrar vista {{label}}",
   "views": {
@@ -17,5 +18,6 @@
   "loadError": "Não foi possível carregar o produto",
   "apiHintBefore": "Verifique se a API está em execução e se",
   "apiHintAfter": "está correta.",
-  "heroAlt": "{{product}} — vista {{view}}"
+  "heroAlt": "{{product}} — vista {{view}}",
+  "addToCart": "Adicionar à sacola"
 }

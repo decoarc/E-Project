@@ -8,6 +8,7 @@
   "emptyCategoryAria": "Aucun produit dans cette catégorie",
   "comingSoon": "Bientôt disponible",
   "viewDetails": "Voir les détails",
+  "addToCart": "Ajouter au panier",
   "genericTitle": "Catégorie",
   "routes": {
     "new-arrivals": {
