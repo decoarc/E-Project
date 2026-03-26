@@ -19,5 +19,7 @@
   "apiHintBefore": "Verifique se a API está em execução e se",
   "apiHintAfter": "está correta.",
   "heroAlt": "{{product}} — vista {{view}}",
-  "addToCart": "Adicionar à sacola"
+  "addToCart": "Adicionar à sacola",
+  "newArrivalBlocked": "Esta edição não está mais disponível para compra.",
+  "newArrivalUnavailable": "Indisponível"
 }

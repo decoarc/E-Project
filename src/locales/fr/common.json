@@ -1,8 +1,8 @@
 {
   "announcement": {
-    "line1": "Drops exclusifs — pièces limitées",
-    "line2": "Livraison gratuite sur les commandes de plus de 200 $",
-    "line3": "Livraison mondiale · Droits et douanes inclus"
+    "dropTimerLabel": "Temps restant",
+    "dropEnded": "Terminé",
+    "dropFallback": "Nouveautés"
   },
   "currency": "Devise",
   "language": "Langue",

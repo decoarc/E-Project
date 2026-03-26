@@ -7,23 +7,37 @@
   background: var(--bg-pure);
   font-size: 11px;
   position: relative;
-  min-height: 3px;
   overflow: visible;
 }
 
-.announcementRow {
+/* After the drop window ends: collapse strip; expand on hover (like before). */
+.announcement--dropEnded {
+  min-height: 3px;
+}
+
+.announcement--dropEnded .announcementRow {
   opacity: 0;
   max-height: 0;
   overflow: hidden;
-  transition: opacity 0.3s ease, max-height 0.3s ease, padding 0.3s ease;
+  padding-top: 0;
+  padding-bottom: 0;
   pointer-events: none;
+  transition: opacity 0.3s ease, max-height 0.3s ease, padding 0.3s ease;
 }
 
-.announcement:hover .announcementRow {
+.announcement--dropEnded:hover .announcementRow {
   opacity: 1;
-  max-height: 100px;
+  max-height: 120px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   pointer-events: auto;
-  padding: 10px 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .announcement--dropEnded .announcementRow,
+  .announcement--dropEnded:hover .announcementRow {
+    transition: none;
+  }
 }
 
 .announcementRow {
@@ -32,6 +46,10 @@
   justify-content: space-between;
   padding: 10px 0;
   gap: 16px;
+}
+
+.announcementRowDrop {
+  flex-wrap: wrap;
 }
 
 .announcementLeft {
@@ -44,7 +62,38 @@
 .announcementRight {
   color: var(--muted);
   text-align: right;
-  max-width: 560px;
+  max-width: min(560px, 100%);
+  min-width: 0;
+}
+
+.announcementDropLabel {
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.announcementDropTime {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 13px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.06em;
+  color: var(--text);
+}
+
+.announcementDropProducts {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1.35;
+}
+
+.announcementDropProducts:hover {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .dot {

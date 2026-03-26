@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useParams } from "react-router-dom";
 import { useCart } from "../../context/cartContext";
+import { useNewArrivals } from "../../context/newArrivalsContext";
 import { CATEGORY_SET_ROUTES } from "../../data/categoryRoutes";
 import { fetchLatestSet, fetchSet } from "../../lib/api";
+import { formatDropRemainingMs } from "../../lib/dropTimerFormat";
 import { useCurrency } from "../../context/currencyContext";
 import "./category.css";
 
@@ -11,6 +13,7 @@ function CategorySetView({ setId, slug, priceMap = {}, useLatest = false }) {
   const { t } = useTranslation("category");
   const { formatPriceUsd } = useCurrency();
   const { addItem } = useCart();
+  const { isBlocked, expired, remainingMs } = useNewArrivals();
   const kicker = t(`routes.${slug}.kicker`);
   const title = t(`routes.${slug}.title`);
   const intro = t(`routes.${slug}.intro`);
@@ -61,6 +64,30 @@ function CategorySetView({ setId, slug, priceMap = {}, useLatest = false }) {
         <span className="categoryPageKicker">{kicker}</span>
         <h1 className="categoryPageTitle">{title}</h1>
         <p className="categoryPageIntro">{intro}</p>
+        {slug === "new-arrivals" && (
+          <div
+            className={`categoryNewArrivalsTimer${expired ? " categoryNewArrivalsTimerEnded" : ""}`}
+            role="timer"
+            aria-live="polite"
+            aria-atomic="true"
+            aria-label={
+              expired
+                ? t("newArrivalsTimerAriaEnded")
+                : t("newArrivalsTimerAria", {
+                    time: formatDropRemainingMs(remainingMs),
+                  })
+            }
+          >
+            <span className="categoryNewArrivalsTimerLabel">
+              {t("newArrivalsTimerLabel")}
+            </span>
+            <span className="categoryNewArrivalsTimerDigits" aria-hidden="true">
+              {expired
+                ? t("newArrivalsTimerEnded")
+                : formatDropRemainingMs(remainingMs)}
+            </span>
+          </div>
+        )}
       </header>
 
       <section className="categorySet" aria-labelledby={headingId}>
@@ -117,9 +144,12 @@ function CategorySetView({ setId, slug, priceMap = {}, useLatest = false }) {
               const priceLabel =
                 priceUsd != null ? formatPriceUsd(priceUsd) : "—";
               const href = `/product/${encodeURIComponent(product.id)}`;
+              const blocked = isBlocked(product.id);
               return (
                 <li key={product.id}>
-                  <article className="categoryCard">
+                  <article
+                    className={`categoryCard${blocked ? " categoryCardBlocked" : ""}`}
+                  >
                     <Link className="categoryCardMedia" to={href}>
                       {product.imageUrls?.front ? (
                         product.imageUrls?.side ? (
@@ -162,6 +192,7 @@ function CategorySetView({ setId, slug, priceMap = {}, useLatest = false }) {
                           <button
                             type="button"
                             className="categoryCardAddBtn"
+                            disabled={blocked}
                             onClick={() =>
                               addItem({
                                 productId: product.id,
@@ -171,7 +202,7 @@ function CategorySetView({ setId, slug, priceMap = {}, useLatest = false }) {
                               })
                             }
                           >
-                            {t("addToCart")}
+                            {blocked ? t("newArrivalUnavailable") : t("addToCart")}
                           </button>
                         )}
                       </div>

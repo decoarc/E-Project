@@ -176,6 +176,20 @@
   color: var(--text);
 }
 
+.productNewArrivalBlocked {
+  font-size: 0.95rem;
+  color: var(--muted);
+  margin: -8px 0 16px;
+  line-height: 1.45;
+  max-width: 36ch;
+}
+
+.productLayoutBlocked .productHeroImg,
+.productLayoutBlocked .productThumbImg {
+  filter: grayscale(1);
+  opacity: 0.85;
+}
+
 .productAddBtn {
   display: inline-flex;
   align-items: center;
@@ -202,6 +216,16 @@
 
 .productAddBtn:active {
   transform: scale(0.99);
+}
+
+.productAddBtn:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.productAddBtn:disabled:hover {
+  opacity: 0.5;
+  transform: none;
 }
 
 .productNote {

@@ -3,11 +3,13 @@ import Header from "../components/header/header";
 import Footer from "../components/footer/footer";
 import { CartProvider } from "../context/cartContext";
 import { CurrencyProvider } from "../context/currencyContext";
+import { NewArrivalsProvider } from "../context/newArrivalsContext";
 import DocumentLang from "../i18n/DocumentLang";
 
 export default function RootLayout() {
   return (
     <CurrencyProvider>
+      <NewArrivalsProvider>
       <CartProvider>
         <DocumentLang />
         <div className="page">
@@ -18,6 +20,7 @@ export default function RootLayout() {
           <Footer />
         </div>
       </CartProvider>
+      </NewArrivalsProvider>
     </CurrencyProvider>
   );
 }

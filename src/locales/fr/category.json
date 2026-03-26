@@ -9,6 +9,11 @@
   "comingSoon": "Bientôt disponible",
   "viewDetails": "Voir les détails",
   "addToCart": "Ajouter au panier",
+  "newArrivalUnavailable": "Indisponible",
+  "newArrivalsTimerLabel": "Temps restant pour cette édition",
+  "newArrivalsTimerEnded": "Édition terminée",
+  "newArrivalsTimerAria": "{{time}} restantes pour cette édition",
+  "newArrivalsTimerAriaEnded": "La fenêtre d’achat pour cette édition est terminée",
   "genericTitle": "Catégorie",
   "routes": {
     "new-arrivals": {

@@ -19,5 +19,7 @@
   "apiHintBefore": "Check that the API is running and",
   "apiHintAfter": "is correct.",
   "heroAlt": "{{product}} — {{view}} view",
-  "addToCart": "Add to bag"
+  "addToCart": "Add to bag",
+  "newArrivalBlocked": "This drop is no longer available for purchase.",
+  "newArrivalUnavailable": "Unavailable"
 }

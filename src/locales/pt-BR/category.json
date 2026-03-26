@@ -9,6 +9,11 @@
   "comingSoon": "Em breve",
   "viewDetails": "Ver detalhes",
   "addToCart": "Adicionar à sacola",
+  "newArrivalUnavailable": "Indisponível",
+  "newArrivalsTimerLabel": "Tempo restante para comprar esta edição",
+  "newArrivalsTimerEnded": "Edição encerrada",
+  "newArrivalsTimerAria": "{{time}} restantes para comprar esta edição",
+  "newArrivalsTimerAriaEnded": "O prazo para comprar esta edição terminou",
   "genericTitle": "Categoria",
   "routes": {
     "new-arrivals": {

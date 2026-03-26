@@ -3,7 +3,9 @@ import { useTranslation } from "react-i18next";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import "./header.css";
 import { useCart } from "../../context/cartContext";
+import { useNewArrivals } from "../../context/newArrivalsContext";
 import { useCurrency } from "../../context/currencyContext";
+import { formatDropRemainingMs } from "../../lib/dropTimerFormat";
 import { useLanguage } from "../../i18n/useLanguage";
 import { useNavItems } from "../../i18n/useNavItems";
 
@@ -25,6 +27,7 @@ export default function Header() {
   const { t } = useTranslation("common");
   const { currency, setCurrency } = useCurrency();
   const { totalQuantity } = useCart();
+  const { expired, remainingMs, dropHeadline } = useNewArrivals();
   const { language, setLanguage, languageOptions } = useLanguage();
   const nav = useNavItems();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -62,15 +65,27 @@ export default function Header() {
 
   return (
     <div className="headerWrapper">
-      <div className="announcement" role="status" aria-live="polite">
-        <div className="container announcementRow">
+      <div
+        className={`announcement${expired ? " announcement--dropEnded" : ""}`}
+      >
+        <div className="container announcementRow announcementRowDrop">
           <div className="announcementLeft">
-            <strong>{t("announcement.line1")}</strong>
-            <span className="dot" aria-hidden="true" />
-            <span>{t("announcement.line2")}</span>
+            <span className="announcementDropLabel">
+              {t("announcement.dropTimerLabel")}
+            </span>
+            <span className="announcementDropTime">
+              {expired
+                ? t("announcement.dropEnded")
+                : formatDropRemainingMs(remainingMs)}
+            </span>
           </div>
           <div className="announcementRight">
-            {t("announcement.line3")}
+            <Link
+              className="announcementDropProducts"
+              to="/category/new-arrivals"
+            >
+              {dropHeadline ?? t("announcement.dropFallback")}
+            </Link>
           </div>
         </div>
       </div>

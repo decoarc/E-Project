@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useParams } from "react-router-dom";
 import { useCart } from "../../context/cartContext";
+import { useNewArrivals } from "../../context/newArrivalsContext";
 import { useCurrency } from "../../context/currencyContext";
 import {
   getCategoryHrefForSetId,
@@ -37,6 +38,7 @@ export default function Product() {
   const { t } = useTranslation(["product", "category"]);
   const { formatPriceUsd } = useCurrency();
   const { addItem } = useCart();
+  const { isBlocked } = useNewArrivals();
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -103,6 +105,7 @@ export default function Product() {
   const activeView = views[activeIndex] ?? views[0];
   const priceUsd = product ? PRODUCT_PRICES_USD[product.id] : undefined;
   const priceLabel = priceUsd != null ? formatPriceUsd(priceUsd) : "—";
+  const blocked = product ? isBlocked(product.id) : false;
 
   return (
     <div className="container productPageWrap">
@@ -148,7 +151,7 @@ export default function Product() {
       )}
 
       {!loading && !error && product && (
-        <div className="productLayout">
+        <div className={`productLayout${blocked ? " productLayoutBlocked" : ""}`}>
           <div className="productGallery">
             <div className="productHero">
               {activeView ? (
@@ -201,10 +204,16 @@ export default function Product() {
               </p>
             )}
             <p className="productPrice">{priceLabel}</p>
+            {blocked && (
+              <p className="productNewArrivalBlocked" role="status">
+                {t("newArrivalBlocked")}
+              </p>
+            )}
             {priceUsd != null && (
               <button
                 type="button"
                 className="productAddBtn"
+                disabled={blocked}
                 onClick={() =>
                   addItem({
                     productId: product.id,
@@ -214,7 +223,7 @@ export default function Product() {
                   })
                 }
               >
-                {t("addToCart")}
+                {blocked ? t("newArrivalUnavailable") : t("addToCart")}
               </button>
             )}
             <p className="productNote">{t("pairNote")}</p>

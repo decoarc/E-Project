@@ -6,6 +6,7 @@ import {
   useMemo,
   useState,
 } from "react";
+import { isBlockedNewArrivalProduct } from "../lib/newArrivalsGate";
 
 const STORAGE_KEY = "e-project.cart";
 
@@ -54,6 +55,16 @@ export function CartProvider({ children }) {
     persist(items);
   }, [items]);
 
+  useEffect(() => {
+    const id = setInterval(() => {
+      setItems((prev) => {
+        const next = prev.filter((line) => !isBlockedNewArrivalProduct(line.productId));
+        return next.length === prev.length ? prev : next;
+      });
+    }, 1000);
+    return () => clearInterval(id);
+  }, []);
+
   const addItem = useCallback((payload) => {
     const {
       productId,
@@ -63,6 +74,9 @@ export function CartProvider({ children }) {
       imageUrl,
     } = payload;
     if (!productId || typeof label !== "string" || priceUsd == null || Number.isNaN(priceUsd)) {
+      return;
+    }
+    if (isBlockedNewArrivalProduct(productId)) {
       return;
     }
     const q = Math.max(1, Math.floor(Number(quantity)) || 1);

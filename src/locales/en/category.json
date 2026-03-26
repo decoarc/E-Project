@@ -9,6 +9,11 @@
   "comingSoon": "Coming soon",
   "viewDetails": "View details",
   "addToCart": "Add to bag",
+  "newArrivalUnavailable": "Unavailable",
+  "newArrivalsTimerLabel": "Time left to shop this drop",
+  "newArrivalsTimerEnded": "Drop ended",
+  "newArrivalsTimerAria": "{{time}} remaining to shop this drop",
+  "newArrivalsTimerAriaEnded": "The shopping window for this drop has ended",
   "genericTitle": "Category",
   "routes": {
     "new-arrivals": {

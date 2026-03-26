@@ -1,8 +1,8 @@
 {
   "announcement": {
-    "line1": "Lançamentos exclusivos — peças limitadas",
-    "line2": "Frete grátis em pedidos acima de US$ 200",
-    "line3": "Envio mundial · Taxas e alfândega inclusas"
+    "dropTimerLabel": "Tempo restante",
+    "dropEnded": "Encerrado",
+    "dropFallback": "Novidades"
   },
   "currency": "Moeda",
   "language": "Idioma",

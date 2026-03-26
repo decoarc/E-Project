@@ -19,5 +19,7 @@
   "apiHintBefore": "Vérifiez que l’API est en cours d’exécution et que",
   "apiHintAfter": "est correcte.",
   "heroAlt": "{{product}} — vue {{view}}",
-  "addToCart": "Ajouter au panier"
+  "addToCart": "Ajouter au panier",
+  "newArrivalBlocked": "Cette édition n’est plus disponible à l’achat.",
+  "newArrivalUnavailable": "Indisponible"
 }
