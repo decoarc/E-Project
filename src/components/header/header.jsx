@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import "./header.css";
@@ -8,6 +8,7 @@ import { useCurrency } from "../../context/currencyContext";
 import { formatDropRemainingMs } from "../../lib/dropTimerFormat";
 import { useLanguage } from "../../i18n/useLanguage";
 import { useNavItems } from "../../i18n/useNavItems";
+import { fetchAllSearchableProducts } from "../../lib/searchProducts";
 
 function Icon({ name }) {
   return (
@@ -32,12 +33,31 @@ export default function Header() {
   const nav = useNavItems();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openMega, setOpenMega] = useState(null);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchProducts, setSearchProducts] = useState([]);
+  const [searchLoading, setSearchLoading] = useState(false);
+  const [searchError, setSearchError] = useState(null);
+  const [searchLoaded, setSearchLoaded] = useState(false);
   const location = useLocation();
   const closeTimeoutRef = useRef(null);
+  const searchRef = useRef(null);
+  const searchInputRef = useRef(null);
+
+  const searchResults = useMemo(() => {
+    const query = searchTerm.trim().toLowerCase();
+    if (!query) return [];
+    return searchProducts
+      .filter((product) =>
+        `${product.label ?? ""} ${product.id ?? ""}`.toLowerCase().includes(query)
+      )
+      .slice(0, 8);
+  }, [searchProducts, searchTerm]);
 
   useEffect(() => {
     setMobileOpen(false);
     setOpenMega(null);
+    setSearchOpen(false);
     if (closeTimeoutRef.current) {
       clearTimeout(closeTimeoutRef.current);
       closeTimeoutRef.current = null;
@@ -57,11 +77,53 @@ export default function Header() {
       if (e.key === "Escape") {
         setMobileOpen(false);
         setOpenMega(null);
+        setSearchOpen(false);
       }
     }
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
   }, []);
+
+  useEffect(() => {
+    if (!searchOpen) return;
+    searchInputRef.current?.focus();
+  }, [searchOpen]);
+
+  useEffect(() => {
+    if (!searchOpen || searchLoaded) return;
+    let cancelled = false;
+    setSearchLoading(true);
+    (async () => {
+      try {
+        const products = await fetchAllSearchableProducts();
+        if (!cancelled) {
+          setSearchProducts(products);
+          setSearchError(null);
+          setSearchLoaded(true);
+        }
+      } catch (e) {
+        if (!cancelled) {
+          setSearchError(e instanceof Error ? e.message : "Could not load products");
+        }
+      } finally {
+        if (!cancelled) setSearchLoading(false);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [searchLoaded, searchOpen]);
+
+  useEffect(() => {
+    function onPointerDown(event) {
+      if (!searchOpen) return;
+      if (searchRef.current && !searchRef.current.contains(event.target)) {
+        setSearchOpen(false);
+      }
+    }
+    window.addEventListener("mousedown", onPointerDown);
+    return () => window.removeEventListener("mousedown", onPointerDown);
+  }, [searchOpen]);
 
   return (
     <div className="headerWrapper">
@@ -138,9 +200,69 @@ export default function Header() {
           </Link>
 
           <div className="headerActions" aria-label={t("actions")}>
-            <button className="iconBtn" type="button" aria-label={t("search")}>
-              <Icon name="search" />
-            </button>
+            <div className="headerSearch" ref={searchRef}>
+              <button
+                className="iconBtn"
+                type="button"
+                aria-label={t("search")}
+                aria-expanded={searchOpen}
+                aria-controls="header-search-panel"
+                onClick={() => setSearchOpen((current) => !current)}
+              >
+                <Icon name="search" />
+              </button>
+              {searchOpen && (
+                <div
+                  className="headerSearchPanel"
+                  id="header-search-panel"
+                  role="dialog"
+                  aria-label={t("search")}
+                >
+                  <input
+                    ref={searchInputRef}
+                    className="headerSearchInput"
+                    type="search"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    placeholder={t("search")}
+                    aria-label={t("search")}
+                  />
+                  {searchLoading ? (
+                    <p className="headerSearchMeta">{t("searchLoadingProducts")}</p>
+                  ) : null}
+                  {!searchLoading && searchError ? (
+                    <p className="headerSearchMeta" role="alert">
+                      {searchError}
+                    </p>
+                  ) : null}
+                  {!searchLoading && !searchError && searchTerm.trim().length === 0 ? (
+                    <p className="headerSearchMeta">{t("searchTypeHint")}</p>
+                  ) : null}
+                  {!searchLoading &&
+                  !searchError &&
+                  searchTerm.trim().length > 0 &&
+                  searchResults.length === 0 ? (
+                    <p className="headerSearchMeta">{t("searchNoResults")}</p>
+                  ) : null}
+                  {!searchLoading && !searchError && searchResults.length > 0 ? (
+                    <ul className="headerSearchList" aria-label={t("searchResultsAria")}>
+                      {searchResults.map((product) => (
+                        <li key={product.id}>
+                          <Link
+                            className="headerSearchItem"
+                            to={`/product/${encodeURIComponent(product.id)}`}
+                            onClick={() => setSearchOpen(false)}
+                          >
+                            <span className="headerSearchItemLabel">{product.label}</span>
+                            <span className="headerSearchItemId">{product.id}</span>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : null}
+                </div>
+              )}
+            </div>
             <button className="iconBtn" type="button" aria-label={t("account")}>
               <Icon name="user" />
             </button>
