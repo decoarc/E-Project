@@ -10,6 +10,7 @@
   "viewDetails": "Voir les détails",
   "addToCart": "Ajouter au panier",
   "newArrivalUnavailable": "Indisponible",
+  "legacyUnavailable": "Archive uniquement",
   "newArrivalsTimerLabel": "Temps restant pour cette édition",
   "newArrivalsTimerEnded": "Édition terminée",
   "newArrivalsTimerAria": "{{time}} restantes pour cette édition",
@@ -35,6 +36,11 @@
       "kicker": "Accessoires · type-3",
       "title": "Accessoires",
       "intro": "Touches finales qui complètent le look."
+    },
+    "legacy": {
+      "kicker": "Archive legacy",
+      "title": "Legacy",
+      "intro": "Saisons passées et pièces d’archive, conservées pour référence. Présentées comme un catalogue — non disponibles à l’achat depuis cette vue."
     }
   }
 }

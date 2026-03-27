@@ -9,7 +9,13 @@ import { formatDropRemainingMs } from "../../lib/dropTimerFormat";
 import { useCurrency } from "../../context/currencyContext";
 import "./category.css";
 
-function CategorySetView({ setId, slug, priceMap = {}, useLatest = false }) {
+function CategorySetView({
+  setId,
+  slug,
+  priceMap = {},
+  useLatest = false,
+  alwaysBlocked = false,
+}) {
   const { t } = useTranslation("category");
   const { formatPriceUsd } = useCurrency();
   const { addItem } = useCart();
@@ -144,13 +150,18 @@ function CategorySetView({ setId, slug, priceMap = {}, useLatest = false }) {
               const priceLabel =
                 priceUsd != null ? formatPriceUsd(priceUsd) : "—";
               const href = `/product/${encodeURIComponent(product.id)}`;
-              const blocked = isBlocked(product.id);
+              const blocked = alwaysBlocked || isBlocked(product.id);
+              const legacyLink = alwaysBlocked ? { legacyArchive: true } : undefined;
               return (
                 <li key={product.id}>
                   <article
                     className={`categoryCard${blocked ? " categoryCardBlocked" : ""}`}
                   >
-                    <Link className="categoryCardMedia" to={href}>
+                    <Link
+                      className="categoryCardMedia"
+                      to={href}
+                      state={legacyLink}
+                    >
                       {product.imageUrls?.front ? (
                         product.imageUrls?.side ? (
                           <div className="categoryCardMediaInner">
@@ -181,11 +192,13 @@ function CategorySetView({ setId, slug, priceMap = {}, useLatest = false }) {
                     </Link>
                     <div className="categoryCardBody">
                       <h3 className="categoryCardTitle">
-                        <Link to={href}>{product.label}</Link>
+                        <Link to={href} state={legacyLink}>
+                          {product.label}
+                        </Link>
                       </h3>
                       <p className="categoryCardPrice">{priceLabel}</p>
                       <div className="categoryCardActions">
-                        <Link className="categoryCardCta" to={href}>
+                        <Link className="categoryCardCta" to={href} state={legacyLink}>
                           {t("viewDetails")}
                         </Link>
                         {priceUsd != null && (
@@ -202,7 +215,11 @@ function CategorySetView({ setId, slug, priceMap = {}, useLatest = false }) {
                               })
                             }
                           >
-                            {blocked ? t("newArrivalUnavailable") : t("addToCart")}
+                            {blocked
+                              ? alwaysBlocked
+                                ? t("legacyUnavailable")
+                                : t("newArrivalUnavailable")
+                              : t("addToCart")}
                           </button>
                         )}
                       </div>
@@ -242,6 +259,7 @@ export default function Category() {
           slug={slug}
           priceMap={setConfig.priceMap}
           useLatest={setConfig.useLatest === true}
+          alwaysBlocked={setConfig.alwaysBlocked === true}
         />
       </div>
     );

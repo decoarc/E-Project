@@ -21,5 +21,7 @@
   "heroAlt": "{{product}} — vista {{view}}",
   "addToCart": "Adicionar à sacola",
   "newArrivalBlocked": "Esta edição não está mais disponível para compra.",
-  "newArrivalUnavailable": "Indisponível"
+  "newArrivalUnavailable": "Indisponível",
+  "legacyBlocked": "Esta peça vem do arquivo legacy e não está disponível para compra aqui.",
+  "legacyUnavailable": "Somente arquivo"
 }

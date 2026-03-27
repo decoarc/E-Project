@@ -54,4 +54,10 @@ export const CATEGORY_SET_ROUTES = {
     setId: "c1",
     priceMap: {},
   },
+  /** Same set as type-3; archive view only — cards blocked, not for sale from this page. */
+  legacy: {
+    setId: "c1",
+    priceMap: {},
+    alwaysBlocked: true,
+  },
 };

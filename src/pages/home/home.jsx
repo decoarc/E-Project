@@ -63,7 +63,7 @@ function FeaturedBlock() {
             {t("featured.title")}
           </h2>
           <p className="homeFeaturedDesc">{t("featured.desc")}</p>
-          <Link className="homeFeaturedLink" to="/category/exclusive">
+          <Link className="homeFeaturedLink" to="/category/legacy">
             {t("featured.link")}
           </Link>
         </div>

@@ -10,6 +10,7 @@
   "viewDetails": "Ver detalhes",
   "addToCart": "Adicionar à sacola",
   "newArrivalUnavailable": "Indisponível",
+  "legacyUnavailable": "Somente arquivo",
   "newArrivalsTimerLabel": "Tempo restante para comprar esta edição",
   "newArrivalsTimerEnded": "Edição encerrada",
   "newArrivalsTimerAria": "{{time}} restantes para comprar esta edição",
@@ -35,6 +36,11 @@
       "kicker": "Acessórios · type-3",
       "title": "Acessórios",
       "intro": "Toques finais que completam o look."
+    },
+    "legacy": {
+      "kicker": "Arquivo legacy",
+      "title": "Legacy",
+      "intro": "Temporadas passadas e peças de arquivo, mantidas para referência. Mostradas como catálogo — indisponíveis para compra nesta vista."
     }
   }
 }

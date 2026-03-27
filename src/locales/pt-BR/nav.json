@@ -17,7 +17,7 @@
         {
           "title": "Destaques",
           "links": [
-            { "label": "Exclusivo na E-Project", "to": "/category/exclusive" },
+            { "label": "Arquivo legacy", "to": "/category/legacy" },
             { "label": "Mais vendidos", "to": "/category/best-sellers" },
             { "label": "Novidades", "to": "/category/new-arrivals" }
           ]

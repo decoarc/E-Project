@@ -11,10 +11,10 @@
     "explore": "Explorar"
   },
   "featured": {
-    "kicker": "Exclusivo na E-Project",
-    "title": "Objetos com intenção",
-    "desc": "Drops curados na fronteira entre rua e arquivo. Cada peça é escolhida pelo ofício e pelo caráter.",
-    "link": "Descobrir exclusivos"
+    "kicker": "Arquivo legacy",
+    "title": "Temporadas passadas, preservadas",
+    "desc": "Navegue por peças de arquivo de edições anteriores — um catálogo de ofício e caráter, mantido para referência.",
+    "link": "Ver arquivo legacy"
   },
   "trust": {
     "aria": "Serviços",

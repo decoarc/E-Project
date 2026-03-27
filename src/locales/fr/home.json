@@ -11,10 +11,10 @@
     "explore": "Explorer"
   },
   "featured": {
-    "kicker": "Exclusif chez E-Project",
-    "title": "Des objets avec intention",
-    "desc": "Des drops sélectionnés entre rue et archive. Chaque pièce est choisie pour son artisanat et son caractère.",
-    "link": "Découvrir les exclusifs"
+    "kicker": "Archive legacy",
+    "title": "Saisons passées, préservées",
+    "desc": "Parcourez les pièces d’archive des éditions précédentes — un catalogue d’artisanat et de caractère, conservé pour référence.",
+    "link": "Voir l’archive legacy"
   },
   "trust": {
     "aria": "Services",

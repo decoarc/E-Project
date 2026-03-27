@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { useCart } from "../../context/cartContext";
 import { useNewArrivals } from "../../context/newArrivalsContext";
 import { useCurrency } from "../../context/currencyContext";
@@ -40,6 +40,7 @@ export default function Product() {
   const { addItem } = useCart();
   const { isBlocked } = useNewArrivals();
   const { id } = useParams();
+  const location = useLocation();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [setData, setSetData] = useState(null);
@@ -105,7 +106,10 @@ export default function Product() {
   const activeView = views[activeIndex] ?? views[0];
   const priceUsd = product ? PRODUCT_PRICES_USD[product.id] : undefined;
   const priceLabel = priceUsd != null ? formatPriceUsd(priceUsd) : "—";
-  const blocked = product ? isBlocked(product.id) : false;
+  const legacyArchive = location.state?.legacyArchive === true;
+  const blocked = product
+    ? legacyArchive || isBlocked(product.id)
+    : false;
 
   return (
     <div className="container productPageWrap">
@@ -206,7 +210,7 @@ export default function Product() {
             <p className="productPrice">{priceLabel}</p>
             {blocked && (
               <p className="productNewArrivalBlocked" role="status">
-                {t("newArrivalBlocked")}
+                {legacyArchive ? t("legacyBlocked") : t("newArrivalBlocked")}
               </p>
             )}
             {priceUsd != null && (
@@ -223,7 +227,11 @@ export default function Product() {
                   })
                 }
               >
-                {blocked ? t("newArrivalUnavailable") : t("addToCart")}
+                {blocked
+                  ? legacyArchive
+                    ? t("legacyUnavailable")
+                    : t("newArrivalUnavailable")
+                  : t("addToCart")}
               </button>
             )}
             <p className="productNote">{t("pairNote")}</p>

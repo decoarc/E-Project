@@ -21,5 +21,7 @@
   "heroAlt": "{{product}} — {{view}} view",
   "addToCart": "Add to bag",
   "newArrivalBlocked": "This drop is no longer available for purchase.",
-  "newArrivalUnavailable": "Unavailable"
+  "newArrivalUnavailable": "Unavailable",
+  "legacyBlocked": "This item is shown from the legacy archive and is not available for purchase here.",
+  "legacyUnavailable": "Archive only"
 }

@@ -11,10 +11,10 @@
     "explore": "Explore"
   },
   "featured": {
-    "kicker": "Exclusively at E-Project",
-    "title": "Objects with intention",
-    "desc": "Curated drops that blur the line between street and archive. Each piece is selected for its craft and character.",
-    "link": "Discover exclusives"
+    "kicker": "Legacy archive",
+    "title": "Past seasons, preserved",
+    "desc": "Browse archived pieces from earlier drops — a catalog of craft and character, kept for reference rather than checkout.",
+    "link": "View legacy archive"
   },
   "trust": {
     "aria": "Services",

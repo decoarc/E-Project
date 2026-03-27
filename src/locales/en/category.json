@@ -10,6 +10,7 @@
   "viewDetails": "View details",
   "addToCart": "Add to bag",
   "newArrivalUnavailable": "Unavailable",
+  "legacyUnavailable": "Archive only",
   "newArrivalsTimerLabel": "Time left to shop this drop",
   "newArrivalsTimerEnded": "Drop ended",
   "newArrivalsTimerAria": "{{time}} remaining to shop this drop",
@@ -35,6 +36,11 @@
       "kicker": "Accessories · type-3",
       "title": "Accessories",
       "intro": "Finishing touches that complete the look."
+    },
+    "legacy": {
+      "kicker": "Legacy archive",
+      "title": "Legacy",
+      "intro": "Past seasons and archived pieces, kept for reference. Shown here as a catalog — not available for purchase from this view."
     }
   }
 }

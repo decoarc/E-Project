@@ -21,5 +21,7 @@
   "heroAlt": "{{product}} — vue {{view}}",
   "addToCart": "Ajouter au panier",
   "newArrivalBlocked": "Cette édition n’est plus disponible à l’achat.",
-  "newArrivalUnavailable": "Indisponible"
+  "newArrivalUnavailable": "Indisponible",
+  "legacyBlocked": "Cette pièce provient de l’archive legacy et n’est pas disponible à l’achat ici.",
+  "legacyUnavailable": "Archive uniquement"
 }
