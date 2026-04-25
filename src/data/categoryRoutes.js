@@ -40,7 +40,7 @@ export function getCategoryHrefForSetId(setId) {
 export const CATEGORY_SET_ROUTES = {
   "new-arrivals": {
     useLatest: true,
-    priceMap: {},
+    priceMap: PRODUCT_PRICES_USD,
   },
   "type-1": {
     setId: "b1",
