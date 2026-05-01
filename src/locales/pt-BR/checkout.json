@@ -1,0 +1,57 @@
+{
+  "progress": {
+    "cart": "Sacola",
+    "shipping": "Entrega",
+    "payment": "Pagamento",
+    "confirmation": "Confirmação"
+  },
+  "cartReview": {
+    "title": "Revisar sacola",
+    "listAria": "Itens da sacola",
+    "subtotal": "Subtotal",
+    "proceed": "Ir para entrega"
+  },
+  "shipping": {
+    "title": "Dados de entrega",
+    "fullName": "Nome completo",
+    "email": "E-mail",
+    "phone": "Telefone",
+    "street": "Endereço",
+    "city": "Cidade",
+    "zip": "CEP",
+    "country": "País",
+    "deliveryNotes": "Observações de entrega (opcional)",
+    "differentBilling": "Endereço de cobrança diferente",
+    "billingTitle": "Endereço de cobrança",
+    "proceed": "Ir para pagamento",
+    "errors": {
+      "required": "Este campo é obrigatório",
+      "invalidEmail": "Insira um e-mail válido"
+    }
+  },
+  "payment": {
+    "title": "Pagamento",
+    "cardholderName": "Nome no cartão",
+    "cardNumber": "Número do cartão",
+    "expiry": "Validade (MM/AA)",
+    "cvv": "CVV",
+    "proceed": "Pagar agora",
+    "mockNote": "Esta é uma demonstração — nenhuma cobrança real será feita.",
+    "errors": {
+      "required": "Este campo é obrigatório",
+      "cardNumber": "Deve ter 16 dígitos",
+      "expiry": "Use o formato MM/AA",
+      "cvv": "Deve ter 3 ou 4 dígitos"
+    }
+  },
+  "confirmation": {
+    "title": "Pedido confirmado!",
+    "orderNumber": "Número do pedido",
+    "copy": "Copiar",
+    "copied": "Copiado!",
+    "items": "Itens",
+    "total": "Total",
+    "shippingTo": "Entrega para",
+    "continueShopping": "Continuar comprando"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "progress": {
+    "cart": "Cart",
+    "shipping": "Shipping",
+    "payment": "Payment",
+    "confirmation": "Confirmation"
+  },
+  "cartReview": {
+    "title": "Review your cart",
+    "listAria": "Cart items",
+    "subtotal": "Subtotal",
+    "proceed": "Proceed to Shipping"
+  },
+  "shipping": {
+    "title": "Shipping Details",
+    "fullName": "Full name",
+    "email": "Email address",
+    "phone": "Phone",
+    "street": "Street address",
+    "city": "City",
+    "zip": "ZIP / Postal code",
+    "country": "Country",
+    "deliveryNotes": "Delivery notes (optional)",
+    "differentBilling": "Ship to a different billing address",
+    "billingTitle": "Billing Address",
+    "proceed": "Continue to Payment",
+    "errors": {
+      "required": "This field is required",
+      "invalidEmail": "Enter a valid email address"
+    }
+  },
+  "payment": {
+    "title": "Payment",
+    "cardholderName": "Cardholder name",
+    "cardNumber": "Card number",
+    "expiry": "Expiry (MM/YY)",
+    "cvv": "CVV",
+    "proceed": "Pay Now",
+    "mockNote": "This is a demo — no real charges will be made.",
+    "errors": {
+      "required": "This field is required",
+      "cardNumber": "Must be 16 digits",
+      "expiry": "Use MM/YY format",
+      "cvv": "Must be 3–4 digits"
+    }
+  },
+  "confirmation": {
+    "title": "Order Confirmed!",
+    "orderNumber": "Order number",
+    "copy": "Copy",
+    "copied": "Copied!",
+    "items": "Items",
+    "total": "Total",
+    "shippingTo": "Shipping to",
+    "continueShopping": "Continue Shopping"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "progress": {
+    "cart": "Panier",
+    "shipping": "Livraison",
+    "payment": "Paiement",
+    "confirmation": "Confirmation"
+  },
+  "cartReview": {
+    "title": "Votre panier",
+    "listAria": "Articles du panier",
+    "subtotal": "Sous-total",
+    "proceed": "Passer à la livraison"
+  },
+  "shipping": {
+    "title": "Informations de livraison",
+    "fullName": "Nom complet",
+    "email": "Adresse e-mail",
+    "phone": "Téléphone",
+    "street": "Adresse",
+    "city": "Ville",
+    "zip": "Code postal",
+    "country": "Pays",
+    "deliveryNotes": "Notes de livraison (facultatif)",
+    "differentBilling": "Adresse de facturation différente",
+    "billingTitle": "Adresse de facturation",
+    "proceed": "Continuer vers le paiement",
+    "errors": {
+      "required": "Ce champ est obligatoire",
+      "invalidEmail": "Entrez une adresse e-mail valide"
+    }
+  },
+  "payment": {
+    "title": "Paiement",
+    "cardholderName": "Nom du titulaire",
+    "cardNumber": "Numéro de carte",
+    "expiry": "Expiration (MM/AA)",
+    "cvv": "CVV",
+    "proceed": "Payer maintenant",
+    "mockNote": "Ceci est une démo — aucun prélèvement ne sera effectué.",
+    "errors": {
+      "required": "Ce champ est obligatoire",
+      "cardNumber": "Doit comporter 16 chiffres",
+      "expiry": "Utilisez le format MM/AA",
+      "cvv": "Doit comporter 3 ou 4 chiffres"
+    }
+  },
+  "confirmation": {
+    "title": "Commande confirmée !",
+    "orderNumber": "Numéro de commande",
+    "copy": "Copier",
+    "copied": "Copié !",
+    "items": "Articles",
+    "total": "Total",
+    "shippingTo": "Livraison à",
+    "continueShopping": "Continuer les achats"
+  }
+}
