@@ -6,6 +6,9 @@ export default function CheckoutGuard({ step, children }) {
   const { items } = useCart();
   const { shippingData, paymentSubmitted } = useCheckout();
 
+  if (step !== "confirmation" && paymentSubmitted) {
+    return <Navigate to="/checkout/confirmation" replace />;
+  }
   if ((step === "cart" || step === "shipping") && items.length === 0) {
     return <Navigate to="/" replace />;
   }
