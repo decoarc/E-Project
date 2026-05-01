@@ -68,3 +68,8 @@ test("shipping step with paymentSubmitted redirects (not children)", () => {
   renderGuard("shipping", [{ productId: "1" }], { fullName: "Jane" }, true);
   expect(screen.queryByText("child")).not.toBeInTheDocument();
 });
+
+test("payment step with paymentSubmitted redirects (not children)", () => {
+  renderGuard("payment", [{ productId: "1" }], { fullName: "Jane" }, true);
+  expect(screen.queryByText("child")).not.toBeInTheDocument();
+});
