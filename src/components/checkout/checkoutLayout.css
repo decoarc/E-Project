@@ -1,0 +1,139 @@
+/* ── Outer wrap ─────────────────────────────────────── */
+.checkoutLayoutWrap {
+  padding-block: 40px 80px;
+}
+
+/* ── Progress bar ───────────────────────────────────── */
+.checkoutProgress {
+  margin-bottom: 48px;
+}
+
+.checkoutProgressList {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.checkoutProgressStep {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 0.875rem;
+  white-space: nowrap;
+}
+
+.checkoutProgressStep:not(:last-child) {
+  flex: 1;
+}
+
+.checkoutProgressStep:not(:last-child)::after {
+  content: "";
+  display: block;
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+  margin-inline: 12px;
+  min-width: 20px;
+}
+
+.checkoutProgressStep--done {
+  color: var(--text);
+}
+
+.checkoutProgressStep--current {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.checkoutProgressDot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1.5px solid currentColor;
+  font-size: 0.75rem;
+  flex-shrink: 0;
+}
+
+.checkoutProgressStep--done .checkoutProgressDot {
+  background: var(--text);
+  color: var(--bg);
+  border-color: var(--text);
+}
+
+.checkoutProgressStep--current .checkoutProgressDot {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+/* ── Shared step page styles ────────────────────────── */
+.checkoutSection {
+  max-width: 640px;
+}
+
+.checkoutSectionTitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  margin: 0 0 32px;
+}
+
+.checkoutSummary {
+  border-top: 1px solid var(--line);
+  padding-top: 24px;
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.checkoutSummaryRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1rem;
+}
+
+.checkoutSummaryAmount {
+  font-weight: 600;
+  font-size: 1.125rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.checkoutBtn {
+  display: block;
+  width: 100%;
+  padding: 14px 24px;
+  background: var(--text);
+  color: var(--bg);
+  border: none;
+  border-radius: var(--radius);
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  transition: opacity 0.15s;
+}
+
+.checkoutBtn:hover {
+  opacity: 0.85;
+}
+
+/* ── Responsive ─────────────────────────────────────── */
+@media (max-width: 600px) {
+  .checkoutProgressLabel {
+    display: none;
+  }
+
+  .checkoutProgressStep:not(:last-child)::after {
+    margin-inline: 6px;
+  }
+}
