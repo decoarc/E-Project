@@ -9,7 +9,10 @@ import {
 const CheckoutContext = createContext(null);
 
 function generateOrderNumber() {
-  return "ORD-" + Math.random().toString(16).slice(2, 8).toUpperCase();
+  return "ORD-" + Math.floor(Math.random() * 0xffffff)
+    .toString(16)
+    .toUpperCase()
+    .padStart(6, "0");
 }
 
 export function CheckoutProvider({ children }) {
