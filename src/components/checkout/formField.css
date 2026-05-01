@@ -1,0 +1,49 @@
+.formField {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.formFieldLabel {
+  font-size: 0.875rem;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.formField input,
+.formField select,
+.formField textarea {
+  padding: 10px 14px;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--bg-pure);
+  font: inherit;
+  font-size: 0.9375rem;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.15s;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.formField input:focus,
+.formField select:focus,
+.formField textarea:focus {
+  border-color: var(--accent);
+}
+
+.formFieldError input,
+.formFieldError select,
+.formFieldError textarea {
+  border-color: #c0392b;
+}
+
+.formFieldErrorMsg {
+  font-size: 0.8125rem;
+  color: #c0392b;
+}
+
+.formField textarea {
+  resize: vertical;
+  min-height: 80px;
+}
