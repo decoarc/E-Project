@@ -82,7 +82,7 @@ A `<CheckoutGuard>` wrapper component enforces step prerequisites via React Rout
 | `/checkout/payment` | `shippingData !== null` | `/checkout/shipping` |
 | `/checkout/confirmation` | `paymentSubmitted === true` | `/checkout/payment` |
 
-After the confirmation page renders, `resetCheckout()` and `CartContext.clearCart()` are both called — so navigating back to `/checkout/cart` after confirmation redirects to `/` (empty cart, clean state).
+Both `resetCheckout()` and `CartContext.clearCart()` are called when the user clicks "Continue Shopping" — not on mount. This keeps the confirmation page stable while the user is viewing it. After clicking "Continue Shopping", cart is empty and checkout state is reset, so any attempt to re-enter `/checkout/cart` redirects to `/`.
 
 ---
 
@@ -146,8 +146,8 @@ When "Different billing address" is unchecked, billing fields are hidden and bil
 3. `CartReviewStep` shows items; user proceeds → `/checkout/shipping`
 4. `ShippingStep` form filled and submitted → `setShipping()` called → `/checkout/payment`
 5. `PaymentStep` card form filled and submitted → `submitPayment()` called → `/checkout/confirmation`
-6. `ConfirmationStep` renders: `orderNumber` displayed, `clearCart()` + `resetCheckout()` called
-7. User clicks "Continue Shopping" → `/`
+6. `ConfirmationStep` renders: `orderNumber` displayed, item list, shipping summary
+7. User clicks "Continue Shopping" → `clearCart()` + `resetCheckout()` called → `/`
 
 ---
 
