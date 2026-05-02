@@ -14,8 +14,17 @@ export function validatePayment(values) {
   if (!values.expiry.trim()) errors.expiry = "required";
   else if (!/^\d{2}\/\d{2}$/.test(values.expiry)) errors.expiry = "expiry";
   if (!values.cvv.trim()) errors.cvv = "required";
-  else if (!/^\d{3,4}$/.test(values.cvv)) errors.cvv = "cvv";
+  else if (!/^\d{3}$/.test(values.cvv)) errors.cvv = "cvv";
   return errors;
+}
+
+function formatCardNumber(raw) {
+  return raw.replace(/\D/g, "").slice(0, 16).replace(/(.{4})/g, "$1 ").trim();
+}
+
+function formatExpiry(raw) {
+  const digits = raw.replace(/\D/g, "").slice(0, 4);
+  return digits.length <= 2 ? digits : digits.slice(0, 2) + "/" + digits.slice(2);
 }
 
 const EMPTY = { cardholderName: "", cardNumber: "", expiry: "", cvv: "" };
@@ -79,7 +88,7 @@ export default function Payment() {
               type="text"
               inputMode="numeric"
               value={values.cardNumber}
-              onChange={(e) => set("cardNumber", e.target.value)}
+              onChange={(e) => set("cardNumber", formatCardNumber(e.target.value))}
               placeholder="0000 0000 0000 0000"
               autoComplete="cc-number"
               maxLength={19}
@@ -92,7 +101,7 @@ export default function Payment() {
               type="text"
               inputMode="numeric"
               value={values.expiry}
-              onChange={(e) => set("expiry", e.target.value)}
+              onChange={(e) => set("expiry", formatExpiry(e.target.value))}
               placeholder="MM/YY"
               autoComplete="cc-exp"
               maxLength={5}
@@ -105,10 +114,10 @@ export default function Payment() {
               type="text"
               inputMode="numeric"
               value={values.cvv}
-              onChange={(e) => set("cvv", e.target.value)}
+              onChange={(e) => set("cvv", e.target.value.replace(/\D/g, "").slice(0, 3))}
               placeholder="123"
               autoComplete="cc-csc"
-              maxLength={4}
+              maxLength={3}
             />
           </FormField>
         </div>

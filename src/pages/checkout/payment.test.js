@@ -36,6 +36,6 @@ test("rejects CVV shorter than 3 digits", () => {
   expect(validatePayment({ ...valid, cvv: "12" })).toHaveProperty("cvv");
 });
 
-test("accepts 4-digit CVV", () => {
-  expect(validatePayment({ ...valid, cvv: "1234" })).not.toHaveProperty("cvv");
+test("rejects 4-digit CVV", () => {
+  expect(validatePayment({ ...valid, cvv: "1234" })).toHaveProperty("cvv");
 });
