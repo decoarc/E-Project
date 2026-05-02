@@ -227,6 +227,24 @@
   line-height: 1.45;
 }
 
+.cartCheckoutBtn {
+  display: block;
+  padding: 14px 24px;
+  background: var(--text);
+  color: var(--bg);
+  border-radius: var(--radius);
+  font-weight: 600;
+  font-size: 1rem;
+  text-align: center;
+  text-decoration: none;
+  transition: opacity 0.15s;
+  margin-bottom: 16px;
+}
+
+.cartCheckoutBtn:hover {
+  opacity: 0.85;
+}
+
 .cartContinueLink {
   font-size: 12px;
   font-weight: 600;

@@ -102,6 +102,9 @@ export default function Cart() {
               </span>
             </div>
             <p className="cartSummaryNote">{t("checkoutNote")}</p>
+            <Link className="cartCheckoutBtn" to="/checkout/cart">
+              {t("checkout")}
+            </Link>
             <Link className="cartContinueLink" to="/category/type-2">
               {t("continueShopping")}
             </Link>

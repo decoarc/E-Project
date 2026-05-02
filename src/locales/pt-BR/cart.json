@@ -10,5 +10,6 @@
   "quantityFor": "Quantidade — {{name}}",
   "remove": "Remover",
   "subtotal": "Subtotal",
-  "checkoutNote": "O checkout ainda não está integrado — carrinho de demonstração."
+  "checkoutNote": "Frete e impostos calculados no checkout.",
+  "checkout": "Finalizar compra"
 }

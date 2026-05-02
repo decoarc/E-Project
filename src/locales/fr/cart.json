@@ -10,5 +10,6 @@
   "quantityFor": "Quantité — {{name}}",
   "remove": "Retirer",
   "subtotal": "Sous-total",
-  "checkoutNote": "Le paiement n'est pas encore connecté — panier de démonstration."
+  "checkoutNote": "Frais de livraison et taxes calculés à la commande.",
+  "checkout": "Passer la commande"
 }

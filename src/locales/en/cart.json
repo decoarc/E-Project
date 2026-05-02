@@ -10,5 +10,6 @@
   "quantityFor": "Quantity for {{name}}",
   "remove": "Remove",
   "subtotal": "Subtotal",
-  "checkoutNote": "Checkout is not connected yet — this is a demo cart."
+  "checkoutNote": "Shipping and taxes calculated at checkout.",
+  "checkout": "Proceed to Checkout"
 }
