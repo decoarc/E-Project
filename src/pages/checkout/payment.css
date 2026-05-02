@@ -1,0 +1,29 @@
+.paymentMockNote {
+  font-size: 0.875rem;
+  color: var(--muted);
+  margin: 0 0 28px;
+  padding: 12px 16px;
+  background: var(--soft);
+  border-radius: var(--radius);
+}
+
+.paymentForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.paymentGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.paymentFullRow {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 600px) {
+  .paymentGrid {
+    grid-template-columns: 1fr;
+  }
+}
