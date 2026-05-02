@@ -1,0 +1,115 @@
+.confirmationSection {
+  max-width: 560px;
+}
+
+.confirmationTitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 700;
+  margin: 0 0 36px;
+}
+
+.confirmationOrderBox {
+  padding: 20px;
+  background: var(--soft);
+  border-radius: var(--radius);
+  margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.confirmationOrderLabel {
+  font-size: 0.8125rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.confirmationOrderRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.confirmationOrderNumber {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.confirmationCopyBtn {
+  background: none;
+  border: 1.5px solid var(--line);
+  border-radius: 8px;
+  padding: 6px 12px;
+  font: inherit;
+  font-size: 0.8125rem;
+  cursor: pointer;
+  color: var(--muted);
+  transition: border-color 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+
+.confirmationCopyBtn:hover {
+  border-color: var(--text);
+  color: var(--text);
+}
+
+.confirmationBlock {
+  margin-bottom: 32px;
+}
+
+.confirmationBlockTitle {
+  font-size: 0.8125rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0 0 12px;
+  font-weight: 600;
+}
+
+.confirmationAddress {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-style: normal;
+  font-size: 0.9375rem;
+}
+
+.confirmationItemList {
+  list-style: none;
+  margin: 0 0 16px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.confirmationItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-block: 10px;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.9375rem;
+}
+
+.confirmationItemPrice {
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+.confirmationTotal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 12px;
+  font-weight: 600;
+}
+
+.confirmationTotalAmount {
+  font-size: 1.125rem;
+  font-variant-numeric: tabular-nums;
+}
