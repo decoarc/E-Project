@@ -1,21 +1,143 @@
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useNavItems } from "../../i18n/useNavItems";
+import { useNewArrivals } from "../../context/newArrivalsContext";
+import { useCurrency } from "../../context/currencyContext";
+import { PRODUCT_PRICES_USD } from "../../data/categoryRoutes";
+import { formatDropRemainingMs } from "../../lib/dropTimerFormat";
 import "./home.css";
 
-function Hero() {
+function pickHeroImage(products) {
+  for (const product of products) {
+    const url = product?.imageUrls?.front ?? product?.imageUrls?.side;
+    if (url) return url;
+  }
+  return null;
+}
+
+function Hero({ heroImageUrl, dropSetName }) {
   const { t } = useTranslation("home");
+  const { expired, remainingMs } = useNewArrivals();
+  const kicker = dropSetName ?? t("hero.kicker");
+
   return (
-    <section className="homeHero" aria-label={t("hero.aria")}>
-      <div className="homeHeroBg" aria-hidden="true" />
+    <section
+      className={`homeHero${heroImageUrl ? " homeHeroHasImage" : ""}`}
+      aria-label={t("hero.aria")}
+    >
+      {heroImageUrl ? (
+        <img
+          className="homeHeroImg"
+          src={heroImageUrl}
+          alt=""
+          fetchPriority="high"
+        />
+      ) : (
+        <div className="homeHeroBg" aria-hidden="true" />
+      )}
+      <div className="homeHeroOverlay" aria-hidden="true" />
       <div className="homeHeroContent">
-        <span className="homeHeroKicker">{t("hero.kicker")}</span>
+        <span className="homeHeroKicker">{kicker}</span>
         <h1 className="homeHeroTitle">{t("hero.title")}</h1>
         <p className="homeHeroSub">{t("hero.sub")}</p>
-        <Link className="homeHeroCta" to="/category/new-arrivals">
-          {t("hero.cta")}
+        <div className="homeHeroActions">
+          <Link className="homeHeroCta" to="/category/new-arrivals">
+            {t("hero.cta")}
+          </Link>
+          {!expired && (
+            <p
+              className="homeHeroTimer"
+              role="timer"
+              aria-live="polite"
+              aria-label={t("hero.timerAria", {
+                time: formatDropRemainingMs(remainingMs),
+              })}
+            >
+              <span className="homeHeroTimerLabel">{t("hero.timerLabel")}</span>
+              <span className="homeHeroTimerDigits" aria-hidden="true">
+                {formatDropRemainingMs(remainingMs)}
+              </span>
+            </p>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function DropRail({ products }) {
+  const { t } = useTranslation("home");
+  const { formatPriceUsd } = useCurrency();
+  const { isBlocked } = useNewArrivals();
+
+  if (!products.length) {
+    return (
+      <section className="homeDropRail" aria-labelledby="drop-rail-heading">
+        <div className="container homeDropRailHead">
+          <h2 id="drop-rail-heading" className="homeSectionTitle homeDropRailTitle">
+            {t("dropRail.title")}
+          </h2>
+          <Link className="homeDropRailViewAll" to="/category/new-arrivals">
+            {t("dropRail.viewAll")}
+          </Link>
+        </div>
+        <div className="homeDropRailScroll" aria-hidden="true">
+          <div className="homeDropRailCard homeDropRailCardSkeleton" />
+          <div className="homeDropRailCard homeDropRailCardSkeleton" />
+          <div className="homeDropRailCard homeDropRailCardSkeleton" />
+        </div>
+      </section>
+    );
+  }
+
+  return (
+    <section className="homeDropRail" aria-labelledby="drop-rail-heading">
+      <div className="container homeDropRailHead">
+        <h2 id="drop-rail-heading" className="homeSectionTitle homeDropRailTitle">
+          {t("dropRail.title")}
+        </h2>
+        <Link className="homeDropRailViewAll" to="/category/new-arrivals">
+          {t("dropRail.viewAll")}
         </Link>
       </div>
+      <ul className="homeDropRailScroll" aria-label={t("dropRail.listAria")}>
+        {products.map((product) => {
+          const href = `/product/${encodeURIComponent(product.id)}`;
+          const priceUsd = PRODUCT_PRICES_USD[product.id];
+          const priceLabel = priceUsd != null ? formatPriceUsd(priceUsd) : null;
+          const blocked = isBlocked(product.id);
+          const imageUrl =
+            product.imageUrls?.front ?? product.imageUrls?.side ?? null;
+
+          return (
+            <li key={product.id} className="homeDropRailItem">
+              <Link
+                className={`homeDropRailCard${blocked ? " homeDropRailCardBlocked" : ""}`}
+                to={href}
+              >
+                <div className="homeDropRailMedia">
+                  {imageUrl ? (
+                    <img
+                      className="homeDropRailImg"
+                      src={imageUrl}
+                      alt=""
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div className="homeDropRailPlaceholder" />
+                  )}
+                </div>
+                <div className="homeDropRailBody">
+                  <span className="homeDropRailName">{product.label}</span>
+                  {priceLabel ? (
+                    <span className="homeDropRailPrice">{priceLabel}</span>
+                  ) : null}
+                </div>
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
     </section>
   );
 }
@@ -102,9 +224,13 @@ function TrustBar() {
 export default function Home() {
   const { t } = useTranslation("home");
   const nav = useNavItems();
+  const { latestProducts, dropSetName } = useNewArrivals();
+  const heroImageUrl = pickHeroImage(latestProducts);
+
   return (
     <div className="home">
-      <Hero />
+      <Hero heroImageUrl={heroImageUrl} dropSetName={dropSetName} />
+      <DropRail products={latestProducts} />
       <section className="homeCollections" aria-labelledby="collections-heading">
         <div className="container">
           <h2 id="collections-heading" className="homeSectionTitle">

@@ -22,6 +22,7 @@ export function NewArrivalsProvider({ children }) {
   const [dropMeta, setDropMeta] = useState({
     setName: null,
     productLabels: [],
+    products: [],
   });
 
   useEffect(() => {
@@ -43,12 +44,16 @@ export function NewArrivalsProvider({ children }) {
             : null;
         if (!cancelled) {
           setNewArrivalProductIds(ids);
-          setDropMeta({ setName, productLabels: labels });
+          setDropMeta({
+            setName,
+            productLabels: labels,
+            products: data?.products ?? [],
+          });
         }
       } catch {
         if (!cancelled) {
           setNewArrivalProductIds([]);
-          setDropMeta({ setName: null, productLabels: [] });
+          setDropMeta({ setName: null, productLabels: [], products: [] });
         }
       }
     })();
@@ -84,10 +89,12 @@ export function NewArrivalsProvider({ children }) {
       expired,
       remainingMs,
       dropHeadline,
+      dropSetName: dropMeta.setName,
+      latestProducts: dropMeta.products,
       isBlocked: isBlockedNewArrivalProduct,
       isNewArrivalProduct,
     }),
-    [expired, remainingMs, dropHeadline]
+    [expired, remainingMs, dropHeadline, dropMeta.setName, dropMeta.products]
   );
 
   return (

@@ -4,7 +4,14 @@
     "kicker": "Nova temporada",
     "title": "A rua encontra o ofício",
     "sub": "Peças exclusivas. Tiragens limitadas. Para quem se move diferente.",
-    "cta": "Comprar o drop"
+    "cta": "Comprar o drop",
+    "timerLabel": "Drop termina em",
+    "timerAria": "Drop termina em {{time}}"
+  },
+  "dropRail": {
+    "title": "Último drop",
+    "viewAll": "Ver tudo",
+    "listAria": "Produtos do último drop"
   },
   "collections": {
     "title": "Comprar por coleção",

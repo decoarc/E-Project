@@ -4,7 +4,14 @@
     "kicker": "New season",
     "title": "Street meets craft",
     "sub": "Exclusive pieces. Limited runs. Built for those who move differently.",
-    "cta": "Shop the drop"
+    "cta": "Shop the drop",
+    "timerLabel": "Drop ends in",
+    "timerAria": "Drop ends in {{time}}"
+  },
+  "dropRail": {
+    "title": "Latest drop",
+    "viewAll": "View all",
+    "listAria": "Latest drop products"
   },
   "collections": {
     "title": "Shop by collection",

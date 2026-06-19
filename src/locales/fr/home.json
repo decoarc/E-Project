@@ -4,7 +4,14 @@
     "kicker": "Nouvelle saison",
     "title": "La rue rencontre le savoir-faire",
     "sub": "Pièces exclusives. Séries limitées. Pour ceux qui avancent autrement.",
-    "cta": "Découvrir le drop"
+    "cta": "Découvrir le drop",
+    "timerLabel": "Fin du drop dans",
+    "timerAria": "Fin du drop dans {{time}}"
+  },
+  "dropRail": {
+    "title": "Dernier drop",
+    "viewAll": "Tout voir",
+    "listAria": "Produits du dernier drop"
   },
   "collections": {
     "title": "Shop par collection",
